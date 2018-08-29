@@ -1,4 +1,4 @@
-sil_stage raw
+sil_stage canonical
 
 import Builtin
 import Swift
@@ -66,71 +66,44 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
   %3 = global_addr @$S7structs6rawValAA13RawEnumLayoutOvp : $*RawEnumLayout // user: %6
   %4 = metatype $@thin RawEnumLayout.Type
   %5 = enum $RawEnumLayout, #RawEnumLayout.one!enumelt // user: %6
-  store %5 to [trivial] %3 : $*RawEnumLayout      // id: %6
+  store %5 to %3 : $*RawEnumLayout                // id: %6
   alloc_global @$S7structs7enumValAA10EnumLayoutOvp // id: %7
   %8 = global_addr @$S7structs7enumValAA10EnumLayoutOvp : $*EnumLayout // user: %11
   %9 = metatype $@thin EnumLayout.Type
   %10 = enum $EnumLayout, #EnumLayout.b!enumelt   // user: %11
-  store %10 to [trivial] %8 : $*EnumLayout        // id: %11
+  store %10 to %8 : $*EnumLayout                  // id: %11
   alloc_global @$S7structs8tupleVals5Int64V_Sds5Int32VSbtvp // id: %12
-  %13 = global_addr @$S7structs8tupleVals5Int64V_Sds5Int32VSbtvp : $*(Int64, Double, Int32, Bool) // user: %31
-  %14 = metatype $@thin Int64.Type                // user: %17
-  %15 = integer_literal $Builtin.Int2048, 1       // user: %17
-  // function_ref Int64.init(_builtinIntegerLiteral:)
-  %16 = function_ref @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %17
-  %17 = apply %16(%15, %14) : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %30
-  %18 = metatype $@thin Double.Type               // user: %21
-  %19 = float_literal $Builtin.FPIEEE80, 0x3FFF8000000000000000 // 1 // user: %21
-  // function_ref Double.init(_builtinFloatLiteral:)
-  %20 = function_ref @$SSd20_builtinFloatLiteralSdBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double // user: %21
-  %21 = apply %20(%19, %18) : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double // user: %30
-  %22 = metatype $@thin Int32.Type                // user: %25
-  %23 = integer_literal $Builtin.Int2048, 1       // user: %25
-  // function_ref Int32.init(_builtinIntegerLiteral:)
-  %24 = function_ref @$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int32.Type) -> Int32 // user: %25
-  %25 = apply %24(%23, %22) : $@convention(method) (Builtin.Int2048, @thin Int32.Type) -> Int32 // user: %30
-  %26 = metatype $@thin Bool.Type                 // user: %29
-  %27 = integer_literal $Builtin.Int1, 0          // user: %29
-  // function_ref Bool.init(_builtinBooleanLiteral:)
-  %28 = function_ref @$SSb22_builtinBooleanLiteralSbBi1__tcfC : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool // user: %29
-  %29 = apply %28(%27, %26) : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool // user: %30
-  %30 = tuple (%17 : $Int64, %21 : $Double, %25 : $Int32, %29 : $Bool) // user: %31
-  store %30 to [trivial] %13 : $*(Int64, Double, Int32, Bool) // id: %31
-  alloc_global @$S7structs12structLayoutAA13StructLayoutsVvp // id: %32
-  %33 = global_addr @$S7structs12structLayoutAA13StructLayoutsVvp : $*StructLayouts // user: %57
-  %34 = metatype $@thin StructLayouts.Type        // user: %56
-  %35 = metatype $@thin Bool.Type                 // user: %38
-  %36 = integer_literal $Builtin.Int1, -1         // user: %38
-  // function_ref Bool.init(_builtinBooleanLiteral:)
-  %37 = function_ref @$SSb22_builtinBooleanLiteralSbBi1__tcfC : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool // user: %38
-  %38 = apply %37(%36, %35) : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool // user: %56
-  %39 = metatype $@thin Int64.Type                // user: %42
-  %40 = integer_literal $Builtin.Int2048, 1       // user: %42
-  // function_ref Int64.init(_builtinIntegerLiteral:)
-  %41 = function_ref @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %42
-  %42 = apply %41(%40, %39) : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %56
-  %43 = metatype $@thin Float.Type                // user: %46
-  %44 = float_literal $Builtin.FPIEEE80, 0x3FFF8000000000000000 // 1 // user: %46
-  // function_ref Float.init(_builtinFloatLiteral:)
-  %45 = function_ref @$SSf20_builtinFloatLiteralSfBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float // user: %46
-  %46 = apply %45(%44, %43) : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float // user: %56
-  %47 = metatype $@thin Int64.Type                // user: %50
-  %48 = integer_literal $Builtin.Int2048, 1       // user: %50
-  // function_ref Int64.init(_builtinIntegerLiteral:)
-  %49 = function_ref @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %50
-  %50 = apply %49(%48, %47) : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 // user: %56
-  %51 = metatype $@thin Double.Type               // user: %54
-  %52 = float_literal $Builtin.FPIEEE80, 0x3FFF8000000000000000 // 1 // user: %54
-  // function_ref Double.init(_builtinFloatLiteral:)
-  %53 = function_ref @$SSd20_builtinFloatLiteralSdBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double // user: %54
-  %54 = apply %53(%52, %51) : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double // user: %56
+  %13 = global_addr @$S7structs8tupleVals5Int64V_Sds5Int32VSbtvp : $*(Int64, Double, Int32, Bool) // user: %23
+  %14 = integer_literal $Builtin.Int64, 1         // user: %15
+  %15 = struct $Int64 (%14 : $Builtin.Int64)      // user: %22
+  %16 = float_literal $Builtin.FPIEEE64, 0x3FF0000000000000 // 1 // user: %17
+  %17 = struct $Double (%16 : $Builtin.FPIEEE64)  // user: %22
+  %18 = integer_literal $Builtin.Int32, 1         // user: %19
+  %19 = struct $Int32 (%18 : $Builtin.Int32)      // user: %22
+  %20 = integer_literal $Builtin.Int1, 0          // user: %21
+  %21 = struct $Bool (%20 : $Builtin.Int1)        // user: %22
+  %22 = tuple (%15 : $Int64, %17 : $Double, %19 : $Int32, %21 : $Bool) // user: %23
+  store %22 to %13 : $*(Int64, Double, Int32, Bool) // id: %23
+  alloc_global @$S7structs12structLayoutAA13StructLayoutsVvp // id: %24
+  %25 = global_addr @$S7structs12structLayoutAA13StructLayoutsVvp : $*StructLayouts // user: %39
+  %26 = metatype $@thin StructLayouts.Type        // user: %38
+  %27 = integer_literal $Builtin.Int1, -1         // user: %28
+  %28 = struct $Bool (%27 : $Builtin.Int1)        // user: %38
+  %29 = integer_literal $Builtin.Int64, 1         // user: %30
+  %30 = struct $Int64 (%29 : $Builtin.Int64)      // user: %38
+  %31 = float_literal $Builtin.FPIEEE32, 0x3F800000 // 1 // user: %32
+  %32 = struct $Float (%31 : $Builtin.FPIEEE32)   // user: %38
+  %33 = integer_literal $Builtin.Int64, 1         // user: %34
+  %34 = struct $Int64 (%33 : $Builtin.Int64)      // user: %38
+  %35 = float_literal $Builtin.FPIEEE64, 0x3FF0000000000000 // 1 // user: %36
+  %36 = struct $Double (%35 : $Builtin.FPIEEE64)  // user: %38
   // function_ref StructLayouts.init(_:_:_:_:_:)
-  %55 = function_ref @$S7structs13StructLayoutsVyACSb_s5Int64VSfAESdtcfC : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %56
-  %56 = apply %55(%38, %42, %46, %50, %54, %34) : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %57
-  store %56 to [trivial] %33 : $*StructLayouts    // id: %57
-  %58 = integer_literal $Builtin.Int32, 0         // user: %59
-  %59 = struct $Int32 (%58 : $Builtin.Int32)      // user: %60
-  return %59 : $Int32                             // id: %60
+  %37 = function_ref @$S7structs13StructLayoutsVyACSb_s5Int64VSfAESdtcfC : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %38
+  %38 = apply %37(%28, %30, %32, %34, %36, %26) : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %39
+  store %38 to %25 : $*StructLayouts              // id: %39
+  %40 = integer_literal $Builtin.Int32, 0         // user: %41
+  %41 = struct $Int32 (%40 : $Builtin.Int32)      // user: %42
+  return %41 : $Int32                             // id: %42
 } // end sil function 'main'
 
 // StructLayouts.var1.getter
@@ -149,9 +122,9 @@ sil [transparent] [serialized] @$S7structs13StructLayoutsV4var1Sbvs : $@conventi
 bb0(%0 : $Bool, %1 : $*StructLayouts):
   debug_value %0 : $Bool, let, name "value", argno 1 // id: %2
   debug_value_addr %1 : $*StructLayouts, var, name "self", argno 2 // id: %3
-  %4 = begin_access [modify] [unknown] %1 : $*StructLayouts // users: %7, %5
+  %4 = begin_access [modify] [static] %1 : $*StructLayouts // users: %7, %5
   %5 = struct_element_addr %4 : $*StructLayouts, #StructLayouts.var1 // user: %6
-  assign %0 to %5 : $*Bool                        // id: %6
+  store %0 to %5 : $*Bool                         // id: %6
   end_access %4 : $*StructLayouts                 // id: %7
   %8 = tuple ()                                   // user: %9
   return %8 : $()                                 // id: %9
@@ -193,9 +166,9 @@ sil [transparent] [serialized] @$S7structs13StructLayoutsV4var3Sfvs : $@conventi
 bb0(%0 : $Float, %1 : $*StructLayouts):
   debug_value %0 : $Float, let, name "value", argno 1 // id: %2
   debug_value_addr %1 : $*StructLayouts, var, name "self", argno 2 // id: %3
-  %4 = begin_access [modify] [unknown] %1 : $*StructLayouts // users: %7, %5
+  %4 = begin_access [modify] [static] %1 : $*StructLayouts // users: %7, %5
   %5 = struct_element_addr %4 : $*StructLayouts, #StructLayouts.var3 // user: %6
-  assign %0 to %5 : $*Float                       // id: %6
+  store %0 to %5 : $*Float                        // id: %6
   end_access %4 : $*StructLayouts                 // id: %7
   %8 = tuple ()                                   // user: %9
   return %8 : $()                                 // id: %9
@@ -214,43 +187,41 @@ bb0(%0 : $Builtin.RawPointer, %1 : $*Builtin.UnsafeValueBuffer, %2 : $*StructLay
 
 // StructLayouts.init(_:_:_:_:_:)
 sil hidden @$S7structs13StructLayoutsVyACSb_s5Int64VSfAESdtcfC : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts {
-// %0                                             // users: %16, %9
-// %1                                             // users: %20, %10
-// %2                                             // users: %24, %11
-// %3                                             // users: %28, %12
-// %4                                             // users: %32, %13
+// %0                                             // users: %32, %14, %7
+// %1                                             // users: %32, %18, %8
+// %2                                             // users: %32, %22, %9
+// %3                                             // users: %32, %26, %10
+// %4                                             // users: %32, %30, %11
 bb0(%0 : $Bool, %1 : $Int64, %2 : $Float, %3 : $Int64, %4 : $Double, %5 : $@thin StructLayouts.Type):
-  %6 = alloc_box ${ var StructLayouts }, var, name "self" // user: %7
-  %7 = mark_uninitialized [rootself] %6 : ${ var StructLayouts } // users: %35, %8
-  %8 = project_box %7 : ${ var StructLayouts }, 0 // users: %34, %30, %26, %22, %18, %14
-  debug_value %0 : $Bool, let, name "var1", argno 1 // id: %9
-  debug_value %1 : $Int64, let, name "var2", argno 2 // id: %10
-  debug_value %2 : $Float, let, name "var3", argno 3 // id: %11
-  debug_value %3 : $Int64, let, name "var4", argno 4 // id: %12
-  debug_value %4 : $Double, let, name "var5", argno 5 // id: %13
-  %14 = begin_access [modify] [unknown] %8 : $*StructLayouts // users: %17, %15
-  %15 = struct_element_addr %14 : $*StructLayouts, #StructLayouts.var1 // user: %16
-  assign %0 to %15 : $*Bool                       // id: %16
-  end_access %14 : $*StructLayouts                // id: %17
-  %18 = begin_access [modify] [unknown] %8 : $*StructLayouts // users: %21, %19
-  %19 = struct_element_addr %18 : $*StructLayouts, #StructLayouts.var2 // user: %20
-  assign %1 to %19 : $*Int64                      // id: %20
-  end_access %18 : $*StructLayouts                // id: %21
-  %22 = begin_access [modify] [unknown] %8 : $*StructLayouts // users: %25, %23
-  %23 = struct_element_addr %22 : $*StructLayouts, #StructLayouts.var3 // user: %24
-  assign %2 to %23 : $*Float                      // id: %24
-  end_access %22 : $*StructLayouts                // id: %25
-  %26 = begin_access [modify] [unknown] %8 : $*StructLayouts // users: %29, %27
-  %27 = struct_element_addr %26 : $*StructLayouts, #StructLayouts.var4 // user: %28
-  assign %3 to %27 : $*Int64                      // id: %28
-  end_access %26 : $*StructLayouts                // id: %29
-  %30 = begin_access [modify] [unknown] %8 : $*StructLayouts // users: %33, %31
-  %31 = struct_element_addr %30 : $*StructLayouts, #StructLayouts.var5 // user: %32
-  assign %4 to %31 : $*Double                     // id: %32
-  end_access %30 : $*StructLayouts                // id: %33
-  %34 = load [trivial] %8 : $*StructLayouts       // user: %36
-  destroy_value %7 : ${ var StructLayouts }       // id: %35
-  return %34 : $StructLayouts                     // id: %36
+  %6 = alloc_stack $StructLayouts, var, name "self" // users: %28, %24, %20, %16, %12, %33
+  debug_value %0 : $Bool, let, name "var1", argno 1 // id: %7
+  debug_value %1 : $Int64, let, name "var2", argno 2 // id: %8
+  debug_value %2 : $Float, let, name "var3", argno 3 // id: %9
+  debug_value %3 : $Int64, let, name "var4", argno 4 // id: %10
+  debug_value %4 : $Double, let, name "var5", argno 5 // id: %11
+  %12 = begin_access [modify] [static] %6 : $*StructLayouts // users: %15, %13
+  %13 = struct_element_addr %12 : $*StructLayouts, #StructLayouts.var1 // user: %14
+  store %0 to %13 : $*Bool                        // id: %14
+  end_access %12 : $*StructLayouts                // id: %15
+  %16 = begin_access [modify] [static] %6 : $*StructLayouts // users: %19, %17
+  %17 = struct_element_addr %16 : $*StructLayouts, #StructLayouts.var2 // user: %18
+  store %1 to %17 : $*Int64                       // id: %18
+  end_access %16 : $*StructLayouts                // id: %19
+  %20 = begin_access [modify] [static] %6 : $*StructLayouts // users: %23, %21
+  %21 = struct_element_addr %20 : $*StructLayouts, #StructLayouts.var3 // user: %22
+  store %2 to %21 : $*Float                       // id: %22
+  end_access %20 : $*StructLayouts                // id: %23
+  %24 = begin_access [modify] [static] %6 : $*StructLayouts // users: %27, %25
+  %25 = struct_element_addr %24 : $*StructLayouts, #StructLayouts.var4 // user: %26
+  store %3 to %25 : $*Int64                       // id: %26
+  end_access %24 : $*StructLayouts                // id: %27
+  %28 = begin_access [modify] [static] %6 : $*StructLayouts // users: %31, %29
+  %29 = struct_element_addr %28 : $*StructLayouts, #StructLayouts.var5 // user: %30
+  store %4 to %29 : $*Double                      // id: %30
+  end_access %28 : $*StructLayouts                // id: %31
+  %32 = struct $StructLayouts (%0 : $Bool, %1 : $Int64, %2 : $Float, %3 : $Int64, %4 : $Double) // user: %34
+  dealloc_stack %6 : $*StructLayouts              // id: %33
+  return %32 : $StructLayouts                     // id: %34
 } // end sil function '$S7structs13StructLayoutsVyACSb_s5Int64VSfAESdtcfC'
 
 // StructLayouts.f1()
@@ -259,39 +230,37 @@ sil @$S7structs13StructLayoutsV2f1yyF : $@convention(method) (StructLayouts) -> 
 bb0(%0 : $StructLayouts):
   debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
   %2 = integer_literal $Builtin.Word, 1           // user: %4
-  // function_ref _allocateUninitializedArray<A>(_:)
-  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
-  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %10, %9, %5
-  %5 = begin_borrow %4 : $(Array<Any>, Builtin.RawPointer) // users: %9, %8, %6
-  %6 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 0 // user: %7
-  %7 = copy_value %6 : $Array<Any>                // users: %28, %25
-  %8 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 1 // user: %11
-  end_borrow %5 from %4 : $(Array<Any>, Builtin.RawPointer), $(Array<Any>, Builtin.RawPointer) // id: %9
-  destroy_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %10
-  %11 = pointer_to_address %8 : $Builtin.RawPointer to [strict] $*Any // user: %12
-  %12 = init_existential_addr %11 : $*Any, $String // user: %19
-  %13 = string_literal utf8 "hi"                  // user: %18
-  %14 = integer_literal $Builtin.Word, 2          // user: %18
-  %15 = integer_literal $Builtin.Int1, -1         // user: %18
-  %16 = metatype $@thin String.Type               // user: %18
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %4
+  %4 = apply %3(%2) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %7, %5, %8
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // users: %26, %23, %6
+  retain_value %5 : $Array<Any>                   // id: %6
+  %7 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %9
+  release_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %8
+  %9 = pointer_to_address %7 : $Builtin.RawPointer to [strict] $*Any // user: %10
+  %10 = init_existential_addr %9 : $*Any, $String // user: %17
+  %11 = string_literal utf8 "hi"                  // user: %16
+  %12 = integer_literal $Builtin.Word, 2          // user: %16
+  %13 = integer_literal $Builtin.Int1, -1         // user: %16
+  %14 = metatype $@thin String.Type               // user: %16
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %17 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %18
-  %18 = apply %17(%13, %14, %15, %16) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %19
-  store %18 to [init] %12 : $*String              // id: %19
+  %15 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %16
+  %16 = apply %15(%11, %12, %13, %14) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  store %16 to %10 : $*String                     // id: %17
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %21
-  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %27, %25
+  %18 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %23
-  %23 = apply %22() : $@convention(thin) () -> @owned String // users: %26, %25
+  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
   // function_ref print(_:separator:terminator:)
-  %24 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %25
-  %25 = apply %24(%7, %21, %23) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
-  destroy_value %23 : $String                     // id: %26
-  destroy_value %21 : $String                     // id: %27
-  destroy_value %7 : $Array<Any>                  // id: %28
-  %29 = tuple ()                                  // user: %30
-  return %29 : $()                                // id: %30
+  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%5, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %5 : $Array<Any>                  // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
 } // end sil function '$S7structs13StructLayoutsV2f1yyF'
 
 // _allocateUninitializedArray<A>(_:)
@@ -315,39 +284,37 @@ sil private @$S7structs13StructLayoutsV2f233_56F2E6E4B1F560691E295A7310D47463LLy
 bb0(%0 : $StructLayouts):
   debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
   %2 = integer_literal $Builtin.Word, 1           // user: %4
-  // function_ref _allocateUninitializedArray<A>(_:)
-  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
-  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %10, %9, %5
-  %5 = begin_borrow %4 : $(Array<Any>, Builtin.RawPointer) // users: %9, %8, %6
-  %6 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 0 // user: %7
-  %7 = copy_value %6 : $Array<Any>                // users: %28, %25
-  %8 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 1 // user: %11
-  end_borrow %5 from %4 : $(Array<Any>, Builtin.RawPointer), $(Array<Any>, Builtin.RawPointer) // id: %9
-  destroy_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %10
-  %11 = pointer_to_address %8 : $Builtin.RawPointer to [strict] $*Any // user: %12
-  %12 = init_existential_addr %11 : $*Any, $String // user: %19
-  %13 = string_literal utf8 "yo"                  // user: %18
-  %14 = integer_literal $Builtin.Word, 2          // user: %18
-  %15 = integer_literal $Builtin.Int1, -1         // user: %18
-  %16 = metatype $@thin String.Type               // user: %18
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %4
+  %4 = apply %3(%2) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %7, %5, %8
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // users: %26, %23, %6
+  retain_value %5 : $Array<Any>                   // id: %6
+  %7 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %9
+  release_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %8
+  %9 = pointer_to_address %7 : $Builtin.RawPointer to [strict] $*Any // user: %10
+  %10 = init_existential_addr %9 : $*Any, $String // user: %17
+  %11 = string_literal utf8 "yo"                  // user: %16
+  %12 = integer_literal $Builtin.Word, 2          // user: %16
+  %13 = integer_literal $Builtin.Int1, -1         // user: %16
+  %14 = metatype $@thin String.Type               // user: %16
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %17 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %18
-  %18 = apply %17(%13, %14, %15, %16) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %19
-  store %18 to [init] %12 : $*String              // id: %19
+  %15 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %16
+  %16 = apply %15(%11, %12, %13, %14) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  store %16 to %10 : $*String                     // id: %17
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %21
-  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %27, %25
+  %18 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %23
-  %23 = apply %22() : $@convention(thin) () -> @owned String // users: %26, %25
+  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
   // function_ref print(_:separator:terminator:)
-  %24 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %25
-  %25 = apply %24(%7, %21, %23) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
-  destroy_value %23 : $String                     // id: %26
-  destroy_value %21 : $String                     // id: %27
-  destroy_value %7 : $Array<Any>                  // id: %28
-  %29 = tuple ()                                  // user: %30
-  return %29 : $()                                // id: %30
+  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%5, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %5 : $Array<Any>                  // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
 } // end sil function '$S7structs13StructLayoutsV2f233_56F2E6E4B1F560691E295A7310D47463LLyyF'
 
 // RawEnumLayout.hashValue.getter
@@ -355,8 +322,8 @@ sil hidden @$S7structs13RawEnumLayoutO9hashValueSivg : $@convention(method) (Raw
 // %0                                             // users: %3, %1
 bb0(%0 : $RawEnumLayout):
   debug_value %0 : $RawEnumLayout, let, name "self", argno 1 // id: %1
-  %2 = alloc_stack $RawEnumLayout                 // users: %6, %5, %3
-  store %0 to [trivial] %2 : $*RawEnumLayout      // id: %3
+  %2 = alloc_stack $RawEnumLayout                 // users: %3, %6, %5
+  store %0 to %2 : $*RawEnumLayout                // id: %3
   // function_ref _hashValue<A>(for:)
   %4 = function_ref @$Ss10_hashValue3forSix_tSHRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %5
   %5 = apply %4<RawEnumLayout>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %7
@@ -369,242 +336,198 @@ sil [serialized] [always_inline] @$Ss10_hashValue3forSix_tSHRzlF : $@convention(
 
 // RawEnumLayout.hash(into:)
 sil hidden @$S7structs13RawEnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, RawEnumLayout) -> () {
-// %0                                             // users: %45, %2
-// %1                                             // users: %7, %3
+// %0                                             // users: %35, %2
+// %1                                             // users: %5, %3
 bb0(%0 : $*Hasher, %1 : $RawEnumLayout):
   debug_value_addr %0 : $*Hasher, var, name "hasher", argno 1 // id: %2
   debug_value %1 : $RawEnumLayout, let, name "self", argno 2 // id: %3
-  %4 = alloc_box ${ var Int }, var, name "discriminator" // user: %5
-  %5 = mark_uninitialized [var] %4 : ${ var Int } // users: %50, %6
-  %6 = project_box %5 : ${ var Int }, 0           // users: %40, %36, %28, %20, %12
-  switch_enum %1 : $RawEnumLayout, case #RawEnumLayout.one!enumelt: bb1, case #RawEnumLayout.two!enumelt: bb2, case #RawEnumLayout.three!enumelt: bb3, case #RawEnumLayout.four!enumelt: bb4 // id: %7
+  %4 = alloc_stack $Int, var, name "discriminator" // users: %30, %26, %20, %14, %8, %40
+  switch_enum %1 : $RawEnumLayout, case #RawEnumLayout.one!enumelt: bb1, case #RawEnumLayout.two!enumelt: bb2, case #RawEnumLayout.three!enumelt: bb3, case #RawEnumLayout.four!enumelt: bb4 // id: %5
 
 bb1:                                              // Preds: bb0
-  %8 = metatype $@thin Int.Type                   // user: %11
-  %9 = integer_literal $Builtin.Int2048, 0        // user: %11
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %10 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %11
-  %11 = apply %10(%9, %8) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %13
-  %12 = begin_access [modify] [unknown] %6 : $*Int // users: %14, %13
-  assign %11 to %12 : $*Int                       // id: %13
-  end_access %12 : $*Int                          // id: %14
-  br bb5                                          // id: %15
+  %6 = integer_literal $Builtin.Int64, 0          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %9
+  %8 = begin_access [modify] [static] %4 : $*Int  // users: %9, %10
+  store %7 to %8 : $*Int                          // id: %9
+  end_access %8 : $*Int                           // id: %10
+  br bb5                                          // id: %11
 
 bb2:                                              // Preds: bb0
-  %16 = metatype $@thin Int.Type                  // user: %19
-  %17 = integer_literal $Builtin.Int2048, 1       // user: %19
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %18 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %19
-  %19 = apply %18(%17, %16) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %21
-  %20 = begin_access [modify] [unknown] %6 : $*Int // users: %22, %21
-  assign %19 to %20 : $*Int                       // id: %21
+  %12 = integer_literal $Builtin.Int64, 1         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %15
+  %14 = begin_access [modify] [static] %4 : $*Int // users: %15, %16
+  store %13 to %14 : $*Int                        // id: %15
+  end_access %14 : $*Int                          // id: %16
+  br bb5                                          // id: %17
+
+bb3:                                              // Preds: bb0
+  %18 = integer_literal $Builtin.Int64, 2         // user: %19
+  %19 = struct $Int (%18 : $Builtin.Int64)        // user: %21
+  %20 = begin_access [modify] [static] %4 : $*Int // users: %21, %22
+  store %19 to %20 : $*Int                        // id: %21
   end_access %20 : $*Int                          // id: %22
   br bb5                                          // id: %23
 
-bb3:                                              // Preds: bb0
-  %24 = metatype $@thin Int.Type                  // user: %27
-  %25 = integer_literal $Builtin.Int2048, 2       // user: %27
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %26 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %27
-  %27 = apply %26(%25, %24) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %29
-  %28 = begin_access [modify] [unknown] %6 : $*Int // users: %30, %29
-  assign %27 to %28 : $*Int                       // id: %29
-  end_access %28 : $*Int                          // id: %30
-  br bb5                                          // id: %31
-
 bb4:                                              // Preds: bb0
-  %32 = metatype $@thin Int.Type                  // user: %35
-  %33 = integer_literal $Builtin.Int2048, 3       // user: %35
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %34 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %35
-  %35 = apply %34(%33, %32) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %37
-  %36 = begin_access [modify] [unknown] %6 : $*Int // users: %38, %37
-  assign %35 to %36 : $*Int                       // id: %37
-  end_access %36 : $*Int                          // id: %38
-  br bb5                                          // id: %39
+  %24 = integer_literal $Builtin.Int64, 3         // user: %25
+  %25 = struct $Int (%24 : $Builtin.Int64)        // user: %27
+  %26 = begin_access [modify] [static] %4 : $*Int // users: %27, %28
+  store %25 to %26 : $*Int                        // id: %27
+  end_access %26 : $*Int                          // id: %28
+  br bb5                                          // id: %29
 
 bb5:                                              // Preds: bb4 bb3 bb2 bb1
-  %40 = begin_access [read] [unknown] %6 : $*Int  // users: %42, %41
-  %41 = load [trivial] %40 : $*Int                // user: %44
-  end_access %40 : $*Int                          // id: %42
-  %43 = alloc_stack $Int                          // users: %49, %47, %44
-  store %41 to [trivial] %43 : $*Int              // id: %44
-  %45 = begin_access [modify] [unknown] %0 : $*Hasher // users: %48, %47
+  %30 = begin_access [read] [static] %4 : $*Int   // users: %31, %32
+  %31 = load %30 : $*Int                          // user: %34
+  end_access %30 : $*Int                          // id: %32
+  %33 = alloc_stack $Int                          // users: %34, %39, %37
+  store %31 to %33 : $*Int                        // id: %34
+  %35 = begin_access [modify] [static] %0 : $*Hasher // users: %38, %37
   // function_ref Hasher.combine<A>(_:)
-  %46 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %47
-  %47 = apply %46<Int>(%43, %45) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
-  end_access %45 : $*Hasher                       // id: %48
-  dealloc_stack %43 : $*Int                       // id: %49
-  destroy_value %5 : ${ var Int }                 // id: %50
-  %51 = tuple ()                                  // user: %52
-  return %51 : $()                                // id: %52
+  %36 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %37
+  %37 = apply %36<Int>(%33, %35) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
+  end_access %35 : $*Hasher                       // id: %38
+  dealloc_stack %33 : $*Int                       // id: %39
+  dealloc_stack %4 : $*Int                        // id: %40
+  %41 = tuple ()                                  // user: %42
+  return %41 : $()                                // id: %42
 } // end sil function '$S7structs13RawEnumLayoutO4hash4intoys6HasherVz_tF'
 
 // Int.init(_builtinIntegerLiteral:)
-sil [transparent] [serialized] @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int
+sil public_external [transparent] [serialized] @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int64"(%0 : $Builtin.Int2048) : $(Builtin.Int64, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %5
+  return %4 : $Int                                // id: %5
+} // end sil function '$SSi22_builtinIntegerLiteralSiBi2048__tcfC'
 
 // Hasher.combine<A>(_:)
 sil [serialized] [always_inline] @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
 
 // RawEnumLayout.init(rawValue:)
 sil hidden @$S7structs13RawEnumLayoutO8rawValueACSgSi_tcfC : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> {
-// %0                                             // users: %83, %75, %60, %52, %37, %29, %14, %6, %5
+// %0                                             // users: %48, %34, %20, %6, %46, %32, %18, %4, %3
 bb0(%0 : $Int, %1 : $@thin RawEnumLayout.Type):
-  %2 = alloc_box ${ var RawEnumLayout }, var, name "self" // user: %3
-  %3 = mark_uninitialized [delegatingself] %2 : ${ var RawEnumLayout } // users: %101, %103, %4
-  %4 = project_box %3 : ${ var RawEnumLayout }, 0 // users: %99, %93, %70, %47, %24
-  debug_value %0 : $Int, let, name "rawValue", argno 1 // id: %5
-  debug_value %0 : $Int, let, name "$match"       // id: %6
-  %7 = metatype $@thin Int.Type                   // user: %10
-  %8 = integer_literal $Builtin.Int2048, 1        // user: %10
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %9 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %10
-  %10 = apply %9(%8, %7) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %12
-  %11 = alloc_stack $Int                          // users: %18, %16, %12
-  store %10 to [trivial] %11 : $*Int              // id: %12
-  %13 = alloc_stack $Int                          // users: %17, %16, %14
-  store %0 to [trivial] %13 : $*Int               // id: %14
-  // function_ref ~= infix<A>(_:_:)
-  %15 = function_ref @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %16
-  %16 = apply %15<Int>(%11, %13) : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %20
-  dealloc_stack %13 : $*Int                       // id: %17
-  dealloc_stack %11 : $*Int                       // id: %18
-  // function_ref Bool._getBuiltinLogicValue()
-  %19 = function_ref @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 // user: %20
-  %20 = apply %19(%16) : $@convention(method) (Bool) -> Builtin.Int1 // user: %21
-  cond_br %20, bb1, bb2                           // id: %21
+  %2 = alloc_stack $RawEnumLayout, var, name "self" // users: %61, %55, %41, %27, %13, %63, %65
+  debug_value %0 : $Int, let, name "rawValue", argno 1 // id: %3
+  debug_value %0 : $Int, let, name "$match"       // id: %4
+  %5 = integer_literal $Builtin.Int64, 1          // user: %7
+  %6 = struct_extract %0 : $Int, #Int._value      // user: %7
+  %7 = builtin "cmp_eq_Int64"(%5 : $Builtin.Int64, %6 : $Builtin.Int64) : $Builtin.Int1 // user: %8
+  %8 = struct $Bool (%7 : $Builtin.Int1)          // user: %9
+  %9 = struct_extract %8 : $Bool, #Bool._value    // user: %10
+  cond_br %9, bb1, bb2                            // id: %10
 
 bb1:                                              // Preds: bb0
-  %22 = metatype $@thin RawEnumLayout.Type
-  %23 = enum $RawEnumLayout, #RawEnumLayout.one!enumelt // user: %25
-  %24 = begin_access [modify] [unknown] %4 : $*RawEnumLayout // users: %26, %25
-  assign %23 to %24 : $*RawEnumLayout             // id: %25
-  end_access %24 : $*RawEnumLayout                // id: %26
-  br bb13                                         // id: %27
+  %11 = metatype $@thin RawEnumLayout.Type
+  %12 = enum $RawEnumLayout, #RawEnumLayout.one!enumelt // user: %14
+  %13 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %14, %15
+  store %12 to %13 : $*RawEnumLayout              // id: %14
+  end_access %13 : $*RawEnumLayout                // id: %15
+  br bb13                                         // id: %16
 
 bb2:                                              // Preds: bb0
-  br bb3                                          // id: %28
+  br bb3                                          // id: %17
 
 bb3:                                              // Preds: bb2
-  debug_value %0 : $Int, let, name "$match"       // id: %29
-  %30 = metatype $@thin Int.Type                  // user: %33
-  %31 = integer_literal $Builtin.Int2048, 2       // user: %33
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %32 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %33
-  %33 = apply %32(%31, %30) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %35
-  %34 = alloc_stack $Int                          // users: %41, %39, %35
-  store %33 to [trivial] %34 : $*Int              // id: %35
-  %36 = alloc_stack $Int                          // users: %40, %39, %37
-  store %0 to [trivial] %36 : $*Int               // id: %37
-  // function_ref ~= infix<A>(_:_:)
-  %38 = function_ref @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %39
-  %39 = apply %38<Int>(%34, %36) : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %43
-  dealloc_stack %36 : $*Int                       // id: %40
-  dealloc_stack %34 : $*Int                       // id: %41
-  // function_ref Bool._getBuiltinLogicValue()
-  %42 = function_ref @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 // user: %43
-  %43 = apply %42(%39) : $@convention(method) (Bool) -> Builtin.Int1 // user: %44
-  cond_br %43, bb4, bb5                           // id: %44
+  debug_value %0 : $Int, let, name "$match"       // id: %18
+  %19 = integer_literal $Builtin.Int64, 2         // user: %21
+  %20 = struct_extract %0 : $Int, #Int._value     // user: %21
+  %21 = builtin "cmp_eq_Int64"(%19 : $Builtin.Int64, %20 : $Builtin.Int64) : $Builtin.Int1 // user: %22
+  %22 = struct $Bool (%21 : $Builtin.Int1)        // user: %23
+  %23 = struct_extract %22 : $Bool, #Bool._value  // user: %24
+  cond_br %23, bb4, bb5                           // id: %24
 
 bb4:                                              // Preds: bb3
-  %45 = metatype $@thin RawEnumLayout.Type
-  %46 = enum $RawEnumLayout, #RawEnumLayout.two!enumelt // user: %48
-  %47 = begin_access [modify] [unknown] %4 : $*RawEnumLayout // users: %49, %48
-  assign %46 to %47 : $*RawEnumLayout             // id: %48
-  end_access %47 : $*RawEnumLayout                // id: %49
-  br bb13                                         // id: %50
+  %25 = metatype $@thin RawEnumLayout.Type
+  %26 = enum $RawEnumLayout, #RawEnumLayout.two!enumelt // user: %28
+  %27 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %28, %29
+  store %26 to %27 : $*RawEnumLayout              // id: %28
+  end_access %27 : $*RawEnumLayout                // id: %29
+  br bb13                                         // id: %30
 
 bb5:                                              // Preds: bb3
-  br bb6                                          // id: %51
+  br bb6                                          // id: %31
 
 bb6:                                              // Preds: bb5
-  debug_value %0 : $Int, let, name "$match"       // id: %52
-  %53 = metatype $@thin Int.Type                  // user: %56
-  %54 = integer_literal $Builtin.Int2048, 3       // user: %56
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %55 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %56
-  %56 = apply %55(%54, %53) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %58
-  %57 = alloc_stack $Int                          // users: %64, %62, %58
-  store %56 to [trivial] %57 : $*Int              // id: %58
-  %59 = alloc_stack $Int                          // users: %63, %62, %60
-  store %0 to [trivial] %59 : $*Int               // id: %60
-  // function_ref ~= infix<A>(_:_:)
-  %61 = function_ref @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %62
-  %62 = apply %61<Int>(%57, %59) : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %66
-  dealloc_stack %59 : $*Int                       // id: %63
-  dealloc_stack %57 : $*Int                       // id: %64
-  // function_ref Bool._getBuiltinLogicValue()
-  %65 = function_ref @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 // user: %66
-  %66 = apply %65(%62) : $@convention(method) (Bool) -> Builtin.Int1 // user: %67
-  cond_br %66, bb7, bb8                           // id: %67
+  debug_value %0 : $Int, let, name "$match"       // id: %32
+  %33 = integer_literal $Builtin.Int64, 3         // user: %35
+  %34 = struct_extract %0 : $Int, #Int._value     // user: %35
+  %35 = builtin "cmp_eq_Int64"(%33 : $Builtin.Int64, %34 : $Builtin.Int64) : $Builtin.Int1 // user: %36
+  %36 = struct $Bool (%35 : $Builtin.Int1)        // user: %37
+  %37 = struct_extract %36 : $Bool, #Bool._value  // user: %38
+  cond_br %37, bb7, bb8                           // id: %38
 
 bb7:                                              // Preds: bb6
-  %68 = metatype $@thin RawEnumLayout.Type
-  %69 = enum $RawEnumLayout, #RawEnumLayout.three!enumelt // user: %71
-  %70 = begin_access [modify] [unknown] %4 : $*RawEnumLayout // users: %72, %71
-  assign %69 to %70 : $*RawEnumLayout             // id: %71
-  end_access %70 : $*RawEnumLayout                // id: %72
-  br bb13                                         // id: %73
+  %39 = metatype $@thin RawEnumLayout.Type
+  %40 = enum $RawEnumLayout, #RawEnumLayout.three!enumelt // user: %42
+  %41 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %42, %43
+  store %40 to %41 : $*RawEnumLayout              // id: %42
+  end_access %41 : $*RawEnumLayout                // id: %43
+  br bb13                                         // id: %44
 
 bb8:                                              // Preds: bb6
-  br bb9                                          // id: %74
+  br bb9                                          // id: %45
 
 bb9:                                              // Preds: bb8
-  debug_value %0 : $Int, let, name "$match"       // id: %75
-  %76 = metatype $@thin Int.Type                  // user: %79
-  %77 = integer_literal $Builtin.Int2048, 4       // user: %79
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %78 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %79
-  %79 = apply %78(%77, %76) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %81
-  %80 = alloc_stack $Int                          // users: %87, %85, %81
-  store %79 to [trivial] %80 : $*Int              // id: %81
-  %82 = alloc_stack $Int                          // users: %86, %85, %83
-  store %0 to [trivial] %82 : $*Int               // id: %83
-  // function_ref ~= infix<A>(_:_:)
-  %84 = function_ref @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %85
-  %85 = apply %84<Int>(%80, %82) : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %89
-  dealloc_stack %82 : $*Int                       // id: %86
-  dealloc_stack %80 : $*Int                       // id: %87
-  // function_ref Bool._getBuiltinLogicValue()
-  %88 = function_ref @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 // user: %89
-  %89 = apply %88(%85) : $@convention(method) (Bool) -> Builtin.Int1 // user: %90
-  cond_br %89, bb10, bb11                         // id: %90
+  debug_value %0 : $Int, let, name "$match"       // id: %46
+  %47 = integer_literal $Builtin.Int64, 4         // user: %49
+  %48 = struct_extract %0 : $Int, #Int._value     // user: %49
+  %49 = builtin "cmp_eq_Int64"(%47 : $Builtin.Int64, %48 : $Builtin.Int64) : $Builtin.Int1 // user: %50
+  %50 = struct $Bool (%49 : $Builtin.Int1)        // user: %51
+  %51 = struct_extract %50 : $Bool, #Bool._value  // user: %52
+  cond_br %51, bb10, bb11                         // id: %52
 
 bb10:                                             // Preds: bb9
-  %91 = metatype $@thin RawEnumLayout.Type
-  %92 = enum $RawEnumLayout, #RawEnumLayout.four!enumelt // user: %94
-  %93 = begin_access [modify] [unknown] %4 : $*RawEnumLayout // users: %95, %94
-  assign %92 to %93 : $*RawEnumLayout             // id: %94
-  end_access %93 : $*RawEnumLayout                // id: %95
-  br bb13                                         // id: %96
+  %53 = metatype $@thin RawEnumLayout.Type
+  %54 = enum $RawEnumLayout, #RawEnumLayout.four!enumelt // user: %56
+  %55 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %56, %57
+  store %54 to %55 : $*RawEnumLayout              // id: %56
+  end_access %55 : $*RawEnumLayout                // id: %57
+  br bb13                                         // id: %58
 
 bb11:                                             // Preds: bb9
-  br bb12                                         // id: %97
+  br bb12                                         // id: %59
 
 bb12:                                             // Preds: bb11
-  br bb14                                         // id: %98
+  br bb14                                         // id: %60
 
 bb13:                                             // Preds: bb10 bb7 bb4 bb1
-  %99 = load [trivial] %4 : $*RawEnumLayout       // user: %100
-  %100 = enum $Optional<RawEnumLayout>, #Optional.some!enumelt.1, %99 : $RawEnumLayout // user: %102
-  destroy_value %3 : ${ var RawEnumLayout }       // id: %101
-  br bb15(%100 : $Optional<RawEnumLayout>)        // id: %102
+  %61 = load %2 : $*RawEnumLayout                 // user: %62
+  %62 = enum $Optional<RawEnumLayout>, #Optional.some!enumelt.1, %61 : $RawEnumLayout // user: %64
+  dealloc_stack %2 : $*RawEnumLayout              // id: %63
+  br bb15(%62 : $Optional<RawEnumLayout>)         // id: %64
 
 bb14:                                             // Preds: bb12
-  destroy_value %3 : ${ var RawEnumLayout }       // id: %103
-  %104 = enum $Optional<RawEnumLayout>, #Optional.none!enumelt // user: %105
-  br bb15(%104 : $Optional<RawEnumLayout>)        // id: %105
+  dealloc_stack %2 : $*RawEnumLayout              // id: %65
+  %66 = enum $Optional<RawEnumLayout>, #Optional.none!enumelt // user: %67
+  br bb15(%66 : $Optional<RawEnumLayout>)         // id: %67
 
-// %106                                           // user: %107
-bb15(%106 : $Optional<RawEnumLayout>):            // Preds: bb13 bb14
-  return %106 : $Optional<RawEnumLayout>          // id: %107
+// %68                                            // user: %69
+bb15(%68 : $Optional<RawEnumLayout>):             // Preds: bb13 bb14
+  return %68 : $Optional<RawEnumLayout>           // id: %69
 } // end sil function '$S7structs13RawEnumLayoutO8rawValueACSgSi_tcfC'
 
 // ~= infix<A>(_:_:)
-sil [transparent] [serialized] @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool
+sil public_external [transparent] [serialized] @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <T where T : Equatable> (@in_guaranteed T, @in_guaranteed T) -> Bool {
+// %0                                             // user: %4
+// %1                                             // user: %4
+bb0(%0 : $*T, %1 : $*T):
+  %2 = metatype $@thick T.Type                    // user: %4
+  %3 = witness_method $T, #Equatable."=="!1 : <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : $@convention(witness_method: Equatable) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0, @thick τ_0_0.Type) -> Bool // user: %4
+  %4 = apply %3<T>(%0, %1, %2) : $@convention(witness_method: Equatable) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0, @thick τ_0_0.Type) -> Bool // user: %5
+  return %4 : $Bool                               // id: %5
+} // end sil function '$Ss2teoiySbx_xtSQRzlF'
 
 // Bool._getBuiltinLogicValue()
-sil [transparent] [serialized] @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1
+sil public_external [transparent] [serialized] @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 {
+// %0                                             // user: %1
+bb0(%0 : $Bool):
+  %1 = struct_extract %0 : $Bool, #Bool._value    // user: %2
+  return %1 : $Builtin.Int1                       // id: %2
+} // end sil function '$SSb21_getBuiltinLogicValueBi1_yF'
 
 // RawEnumLayout.rawValue.getter
 sil hidden @$S7structs13RawEnumLayoutO8rawValueSivg : $@convention(method) (RawEnumLayout) -> Int {
@@ -614,40 +537,28 @@ bb0(%0 : $RawEnumLayout):
   switch_enum %0 : $RawEnumLayout, case #RawEnumLayout.one!enumelt: bb1, case #RawEnumLayout.two!enumelt: bb2, case #RawEnumLayout.three!enumelt: bb3, case #RawEnumLayout.four!enumelt: bb4 // id: %2
 
 bb1:                                              // Preds: bb0
-  %3 = metatype $@thin Int.Type                   // user: %6
-  %4 = integer_literal $Builtin.Int2048, 1        // user: %6
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %5 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %6
-  %6 = apply %5(%4, %3) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %7
-  br bb5(%6 : $Int)                               // id: %7
+  %3 = integer_literal $Builtin.Int64, 1          // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %5
+  br bb5(%4 : $Int)                               // id: %5
 
 bb2:                                              // Preds: bb0
-  %8 = metatype $@thin Int.Type                   // user: %11
-  %9 = integer_literal $Builtin.Int2048, 2        // user: %11
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %10 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %11
-  %11 = apply %10(%9, %8) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %12
-  br bb5(%11 : $Int)                              // id: %12
+  %6 = integer_literal $Builtin.Int64, 2          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %8
+  br bb5(%7 : $Int)                               // id: %8
 
 bb3:                                              // Preds: bb0
-  %13 = metatype $@thin Int.Type                  // user: %16
-  %14 = integer_literal $Builtin.Int2048, 3       // user: %16
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %15 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %16
-  %16 = apply %15(%14, %13) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %17
-  br bb5(%16 : $Int)                              // id: %17
+  %9 = integer_literal $Builtin.Int64, 3          // user: %10
+  %10 = struct $Int (%9 : $Builtin.Int64)         // user: %11
+  br bb5(%10 : $Int)                              // id: %11
 
 bb4:                                              // Preds: bb0
-  %18 = metatype $@thin Int.Type                  // user: %21
-  %19 = integer_literal $Builtin.Int2048, 4       // user: %21
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %20 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %21
-  %21 = apply %20(%19, %18) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %22
-  br bb5(%21 : $Int)                              // id: %22
+  %12 = integer_literal $Builtin.Int64, 4         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %14
+  br bb5(%13 : $Int)                              // id: %14
 
-// %23                                            // user: %24
-bb5(%23 : $Int):                                  // Preds: bb4 bb3 bb2 bb1
-  return %23 : $Int                               // id: %24
+// %15                                            // user: %16
+bb5(%15 : $Int):                                  // Preds: bb4 bb3 bb2 bb1
+  return %15 : $Int                               // id: %16
 } // end sil function '$S7structs13RawEnumLayoutO8rawValueSivg'
 
 // protocol witness for static Equatable.== infix(_:_:) in conformance RawEnumLayout
@@ -668,7 +579,7 @@ sil [serialized] @$Ss2eeoiySbx_xtSYRzSQ8RawValueRpzlF : $@convention(thin) <τ_0
 sil private [transparent] [thunk] @$S7structs13RawEnumLayoutOSHAASH9hashValueSivgTW : $@convention(witness_method: Hashable) (@in_guaranteed RawEnumLayout) -> Int {
 // %0                                             // user: %1
 bb0(%0 : $*RawEnumLayout):
-  %1 = load [trivial] %0 : $*RawEnumLayout        // user: %3
+  %1 = load %0 : $*RawEnumLayout                  // user: %3
   // function_ref RawEnumLayout.hashValue.getter
   %2 = function_ref @$S7structs13RawEnumLayoutO9hashValueSivg : $@convention(method) (RawEnumLayout) -> Int // user: %3
   %3 = apply %2(%1) : $@convention(method) (RawEnumLayout) -> Int // user: %4
@@ -680,7 +591,7 @@ sil private [transparent] [thunk] @$S7structs13RawEnumLayoutOSHAASH4hash4intoys6
 // %0                                             // user: %4
 // %1                                             // user: %2
 bb0(%0 : $*Hasher, %1 : $*RawEnumLayout):
-  %2 = load [trivial] %1 : $*RawEnumLayout        // user: %4
+  %2 = load %1 : $*RawEnumLayout                  // user: %4
   // function_ref RawEnumLayout.hash(into:)
   %3 = function_ref @$S7structs13RawEnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, RawEnumLayout) -> () // user: %4
   %4 = apply %3(%0, %2) : $@convention(method) (@inout Hasher, RawEnumLayout) -> ()
@@ -693,12 +604,12 @@ sil private [transparent] [thunk] @$S7structs13RawEnumLayoutOSYAASY8rawValuexSg0
 // %0                                             // user: %7
 // %1                                             // user: %3
 bb0(%0 : $*Optional<RawEnumLayout>, %1 : $*Int, %2 : $@thick RawEnumLayout.Type):
-  %3 = load [trivial] %1 : $*Int                  // user: %6
+  %3 = load %1 : $*Int                            // user: %6
   %4 = metatype $@thin RawEnumLayout.Type         // user: %6
   // function_ref RawEnumLayout.init(rawValue:)
   %5 = function_ref @$S7structs13RawEnumLayoutO8rawValueACSgSi_tcfC : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> // user: %6
   %6 = apply %5(%3, %4) : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> // user: %7
-  store %6 to [trivial] %0 : $*Optional<RawEnumLayout> // id: %7
+  store %6 to %0 : $*Optional<RawEnumLayout>      // id: %7
   %8 = tuple ()                                   // user: %9
   return %8 : $()                                 // id: %9
 } // end sil function '$S7structs13RawEnumLayoutOSYAASY8rawValuexSg0bF0Qz_tcfCTW'
@@ -708,11 +619,11 @@ sil private [transparent] [thunk] @$S7structs13RawEnumLayoutOSYAASY8rawValue0bF0
 // %0                                             // user: %5
 // %1                                             // user: %2
 bb0(%0 : $*Int, %1 : $*RawEnumLayout):
-  %2 = load [trivial] %1 : $*RawEnumLayout        // user: %4
+  %2 = load %1 : $*RawEnumLayout                  // user: %4
   // function_ref RawEnumLayout.rawValue.getter
   %3 = function_ref @$S7structs13RawEnumLayoutO8rawValueSivg : $@convention(method) (RawEnumLayout) -> Int // user: %4
   %4 = apply %3(%2) : $@convention(method) (RawEnumLayout) -> Int // user: %5
-  store %4 to [trivial] %0 : $*Int                // id: %5
+  store %4 to %0 : $*Int                          // id: %5
   %6 = tuple ()                                   // user: %7
   return %6 : $()                                 // id: %7
 } // end sil function '$S7structs13RawEnumLayoutOSYAASY8rawValue0bF0QzvgTW'
@@ -726,226 +637,207 @@ bb0(%0 : $EnumLayout):
 
 bb1:                                              // Preds: bb0
   %3 = integer_literal $Builtin.Word, 1           // user: %5
-  // function_ref _allocateUninitializedArray<A>(_:)
-  %4 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %5
-  %5 = apply %4<Any>(%3) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %11, %10, %6
-  %6 = begin_borrow %5 : $(Array<Any>, Builtin.RawPointer) // users: %10, %9, %7
-  %7 = tuple_extract %6 : $(Array<Any>, Builtin.RawPointer), 0 // user: %8
-  %8 = copy_value %7 : $Array<Any>                // users: %29, %26
-  %9 = tuple_extract %6 : $(Array<Any>, Builtin.RawPointer), 1 // user: %12
-  end_borrow %6 from %5 : $(Array<Any>, Builtin.RawPointer), $(Array<Any>, Builtin.RawPointer) // id: %10
-  destroy_value %5 : $(Array<Any>, Builtin.RawPointer) // id: %11
-  %12 = pointer_to_address %9 : $Builtin.RawPointer to [strict] $*Any // user: %13
-  %13 = init_existential_addr %12 : $*Any, $String // user: %20
-  %14 = string_literal utf8 "a"                   // user: %19
-  %15 = integer_literal $Builtin.Word, 1          // user: %19
-  %16 = integer_literal $Builtin.Int1, -1         // user: %19
-  %17 = metatype $@thin String.Type               // user: %19
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %4 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %5
+  %5 = apply %4(%3) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %8, %6, %9
+  %6 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 0 // users: %27, %24, %7
+  retain_value %6 : $Array<Any>                   // id: %7
+  %8 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 1 // user: %10
+  release_value %5 : $(Array<Any>, Builtin.RawPointer) // id: %9
+  %10 = pointer_to_address %8 : $Builtin.RawPointer to [strict] $*Any // user: %11
+  %11 = init_existential_addr %10 : $*Any, $String // user: %18
+  %12 = string_literal utf8 "a"                   // user: %17
+  %13 = integer_literal $Builtin.Word, 1          // user: %17
+  %14 = integer_literal $Builtin.Int1, -1         // user: %17
+  %15 = metatype $@thin String.Type               // user: %17
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %18 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %19
-  %19 = apply %18(%14, %15, %16, %17) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %20
-  store %19 to [init] %13 : $*String              // id: %20
+  %16 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  %17 = apply %16(%12, %13, %14, %15) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %18
+  store %17 to %11 : $*String                     // id: %18
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %21 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %22
-  %22 = apply %21() : $@convention(thin) () -> @owned String // users: %28, %26
+  %19 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %20
+  %20 = apply %19() : $@convention(thin) () -> @owned String // users: %26, %24
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %23 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %24
-  %24 = apply %23() : $@convention(thin) () -> @owned String // users: %27, %26
+  %21 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %22
+  %22 = apply %21() : $@convention(thin) () -> @owned String // users: %25, %24
   // function_ref print(_:separator:terminator:)
-  %25 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %26
-  %26 = apply %25(%8, %22, %24) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
-  destroy_value %24 : $String                     // id: %27
-  destroy_value %22 : $String                     // id: %28
-  destroy_value %8 : $Array<Any>                  // id: %29
-  br bb4                                          // id: %30
+  %23 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %24
+  %24 = apply %23(%6, %20, %22) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %22 : $String                     // id: %25
+  release_value %20 : $String                     // id: %26
+  release_value %6 : $Array<Any>                  // id: %27
+  br bb4                                          // id: %28
 
 bb2:                                              // Preds: bb0
-  %31 = integer_literal $Builtin.Word, 1          // user: %33
-  // function_ref _allocateUninitializedArray<A>(_:)
-  %32 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %33
-  %33 = apply %32<Any>(%31) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %39, %38, %34
-  %34 = begin_borrow %33 : $(Array<Any>, Builtin.RawPointer) // users: %38, %37, %35
-  %35 = tuple_extract %34 : $(Array<Any>, Builtin.RawPointer), 0 // user: %36
-  %36 = copy_value %35 : $Array<Any>              // users: %57, %54
-  %37 = tuple_extract %34 : $(Array<Any>, Builtin.RawPointer), 1 // user: %40
-  end_borrow %34 from %33 : $(Array<Any>, Builtin.RawPointer), $(Array<Any>, Builtin.RawPointer) // id: %38
-  destroy_value %33 : $(Array<Any>, Builtin.RawPointer) // id: %39
-  %40 = pointer_to_address %37 : $Builtin.RawPointer to [strict] $*Any // user: %41
-  %41 = init_existential_addr %40 : $*Any, $String // user: %48
-  %42 = string_literal utf8 "b"                   // user: %47
-  %43 = integer_literal $Builtin.Word, 1          // user: %47
-  %44 = integer_literal $Builtin.Int1, -1         // user: %47
-  %45 = metatype $@thin String.Type               // user: %47
+  %29 = integer_literal $Builtin.Word, 1          // user: %31
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %30 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %31
+  %31 = apply %30(%29) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %34, %32, %35
+  %32 = tuple_extract %31 : $(Array<Any>, Builtin.RawPointer), 0 // users: %53, %50, %33
+  retain_value %32 : $Array<Any>                  // id: %33
+  %34 = tuple_extract %31 : $(Array<Any>, Builtin.RawPointer), 1 // user: %36
+  release_value %31 : $(Array<Any>, Builtin.RawPointer) // id: %35
+  %36 = pointer_to_address %34 : $Builtin.RawPointer to [strict] $*Any // user: %37
+  %37 = init_existential_addr %36 : $*Any, $String // user: %44
+  %38 = string_literal utf8 "b"                   // user: %43
+  %39 = integer_literal $Builtin.Word, 1          // user: %43
+  %40 = integer_literal $Builtin.Int1, -1         // user: %43
+  %41 = metatype $@thin String.Type               // user: %43
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %46 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %47
-  %47 = apply %46(%42, %43, %44, %45) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %48
-  store %47 to [init] %41 : $*String              // id: %48
+  %42 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %43
+  %43 = apply %42(%38, %39, %40, %41) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %44
+  store %43 to %37 : $*String                     // id: %44
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %49 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %50
-  %50 = apply %49() : $@convention(thin) () -> @owned String // users: %56, %54
+  %45 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %46
+  %46 = apply %45() : $@convention(thin) () -> @owned String // users: %52, %50
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %51 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %52
-  %52 = apply %51() : $@convention(thin) () -> @owned String // users: %55, %54
+  %47 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %48
+  %48 = apply %47() : $@convention(thin) () -> @owned String // users: %51, %50
   // function_ref print(_:separator:terminator:)
-  %53 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %54
-  %54 = apply %53(%36, %50, %52) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
-  destroy_value %52 : $String                     // id: %55
-  destroy_value %50 : $String                     // id: %56
-  destroy_value %36 : $Array<Any>                 // id: %57
-  br bb4                                          // id: %58
+  %49 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %50
+  %50 = apply %49(%32, %46, %48) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %48 : $String                     // id: %51
+  release_value %46 : $String                     // id: %52
+  release_value %32 : $Array<Any>                 // id: %53
+  br bb4                                          // id: %54
 
 bb3:                                              // Preds: bb0
-  %59 = integer_literal $Builtin.Word, 1          // user: %61
-  // function_ref _allocateUninitializedArray<A>(_:)
-  %60 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %61
-  %61 = apply %60<Any>(%59) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %67, %66, %62
-  %62 = begin_borrow %61 : $(Array<Any>, Builtin.RawPointer) // users: %66, %65, %63
-  %63 = tuple_extract %62 : $(Array<Any>, Builtin.RawPointer), 0 // user: %64
-  %64 = copy_value %63 : $Array<Any>              // users: %85, %82
-  %65 = tuple_extract %62 : $(Array<Any>, Builtin.RawPointer), 1 // user: %68
-  end_borrow %62 from %61 : $(Array<Any>, Builtin.RawPointer), $(Array<Any>, Builtin.RawPointer) // id: %66
-  destroy_value %61 : $(Array<Any>, Builtin.RawPointer) // id: %67
-  %68 = pointer_to_address %65 : $Builtin.RawPointer to [strict] $*Any // user: %69
-  %69 = init_existential_addr %68 : $*Any, $String // user: %76
-  %70 = string_literal utf8 "c"                   // user: %75
-  %71 = integer_literal $Builtin.Word, 1          // user: %75
-  %72 = integer_literal $Builtin.Int1, -1         // user: %75
-  %73 = metatype $@thin String.Type               // user: %75
+  %55 = integer_literal $Builtin.Word, 1          // user: %57
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %56 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %57
+  %57 = apply %56(%55) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %60, %58, %61
+  %58 = tuple_extract %57 : $(Array<Any>, Builtin.RawPointer), 0 // users: %79, %76, %59
+  retain_value %58 : $Array<Any>                  // id: %59
+  %60 = tuple_extract %57 : $(Array<Any>, Builtin.RawPointer), 1 // user: %62
+  release_value %57 : $(Array<Any>, Builtin.RawPointer) // id: %61
+  %62 = pointer_to_address %60 : $Builtin.RawPointer to [strict] $*Any // user: %63
+  %63 = init_existential_addr %62 : $*Any, $String // user: %70
+  %64 = string_literal utf8 "c"                   // user: %69
+  %65 = integer_literal $Builtin.Word, 1          // user: %69
+  %66 = integer_literal $Builtin.Int1, -1         // user: %69
+  %67 = metatype $@thin String.Type               // user: %69
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %74 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %75
-  %75 = apply %74(%70, %71, %72, %73) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %76
-  store %75 to [init] %69 : $*String              // id: %76
+  %68 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %69
+  %69 = apply %68(%64, %65, %66, %67) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %70
+  store %69 to %63 : $*String                     // id: %70
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %77 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %78
-  %78 = apply %77() : $@convention(thin) () -> @owned String // users: %84, %82
+  %71 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %72
+  %72 = apply %71() : $@convention(thin) () -> @owned String // users: %78, %76
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %79 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %80
-  %80 = apply %79() : $@convention(thin) () -> @owned String // users: %83, %82
+  %73 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %74
+  %74 = apply %73() : $@convention(thin) () -> @owned String // users: %77, %76
   // function_ref print(_:separator:terminator:)
-  %81 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %82
-  %82 = apply %81(%64, %78, %80) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
-  destroy_value %80 : $String                     // id: %83
-  destroy_value %78 : $String                     // id: %84
-  destroy_value %64 : $Array<Any>                 // id: %85
-  br bb4                                          // id: %86
+  %75 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %76
+  %76 = apply %75(%58, %72, %74) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %74 : $String                     // id: %77
+  release_value %72 : $String                     // id: %78
+  release_value %58 : $Array<Any>                 // id: %79
+  br bb4                                          // id: %80
 
 bb4:                                              // Preds: bb3 bb2 bb1
-  %87 = tuple ()                                  // user: %88
-  return %87 : $()                                // id: %88
+  %81 = tuple ()                                  // user: %82
+  return %81 : $()                                // id: %82
 } // end sil function '$S7structs10EnumLayoutO7whatAmIyyF'
 
 // static EnumLayout.__derived_enum_equals(_:_:)
 sil hidden @$S7structs10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ : $@convention(method) (EnumLayout, EnumLayout, @thin EnumLayout.Type) -> Bool {
-// %0                                             // users: %9, %3
-// %1                                             // users: %37, %4
+// %0                                             // users: %7, %3
+// %1                                             // users: %27, %4
 // %2                                             // user: %5
 bb0(%0 : $EnumLayout, %1 : $EnumLayout, %2 : $@thin EnumLayout.Type):
   debug_value %0 : $EnumLayout, let, name "a", argno 1 // id: %3
   debug_value %1 : $EnumLayout, let, name "b", argno 2 // id: %4
   debug_value %2 : $@thin EnumLayout.Type, let, name "self", argno 3 // id: %5
-  %6 = alloc_box ${ var Int }, var, name "index_a" // user: %7
-  %7 = mark_uninitialized [var] %6 : ${ var Int } // users: %72, %8
-  %8 = project_box %7 : ${ var Int }, 0           // users: %63, %30, %22, %14
-  switch_enum %0 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %9
+  %6 = alloc_stack $Int, var, name "index_a"      // users: %46, %22, %16, %10, %57
+  switch_enum %0 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %7
 
 bb1:                                              // Preds: bb0
-  %10 = metatype $@thin Int.Type                  // user: %13
-  %11 = integer_literal $Builtin.Int2048, 0       // user: %13
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %12 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %13
-  %13 = apply %12(%11, %10) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %15
-  %14 = begin_access [modify] [unknown] %8 : $*Int // users: %16, %15
-  assign %13 to %14 : $*Int                       // id: %15
-  end_access %14 : $*Int                          // id: %16
-  br bb4                                          // id: %17
+  %8 = integer_literal $Builtin.Int64, 0          // user: %9
+  %9 = struct $Int (%8 : $Builtin.Int64)          // user: %11
+  %10 = begin_access [modify] [static] %6 : $*Int // users: %11, %12
+  store %9 to %10 : $*Int                         // id: %11
+  end_access %10 : $*Int                          // id: %12
+  br bb4                                          // id: %13
 
 bb2:                                              // Preds: bb0
-  %18 = metatype $@thin Int.Type                  // user: %21
-  %19 = integer_literal $Builtin.Int2048, 1       // user: %21
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %20 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %21
-  %21 = apply %20(%19, %18) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %23
-  %22 = begin_access [modify] [unknown] %8 : $*Int // users: %24, %23
-  assign %21 to %22 : $*Int                       // id: %23
+  %14 = integer_literal $Builtin.Int64, 1         // user: %15
+  %15 = struct $Int (%14 : $Builtin.Int64)        // user: %17
+  %16 = begin_access [modify] [static] %6 : $*Int // users: %17, %18
+  store %15 to %16 : $*Int                        // id: %17
+  end_access %16 : $*Int                          // id: %18
+  br bb4                                          // id: %19
+
+bb3:                                              // Preds: bb0
+  %20 = integer_literal $Builtin.Int64, 2         // user: %21
+  %21 = struct $Int (%20 : $Builtin.Int64)        // user: %23
+  %22 = begin_access [modify] [static] %6 : $*Int // users: %23, %24
+  store %21 to %22 : $*Int                        // id: %23
   end_access %22 : $*Int                          // id: %24
   br bb4                                          // id: %25
 
-bb3:                                              // Preds: bb0
-  %26 = metatype $@thin Int.Type                  // user: %29
-  %27 = integer_literal $Builtin.Int2048, 2       // user: %29
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %28 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %29
-  %29 = apply %28(%27, %26) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %31
-  %30 = begin_access [modify] [unknown] %8 : $*Int // users: %32, %31
-  assign %29 to %30 : $*Int                       // id: %31
-  end_access %30 : $*Int                          // id: %32
-  br bb4                                          // id: %33
-
 bb4:                                              // Preds: bb3 bb2 bb1
-  %34 = alloc_box ${ var Int }, var, name "index_b" // user: %35
-  %35 = mark_uninitialized [var] %34 : ${ var Int } // users: %71, %36
-  %36 = project_box %35 : ${ var Int }, 0         // users: %66, %58, %50, %42
-  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb5, case #EnumLayout.b!enumelt: bb6, case #EnumLayout.c!enumelt: bb7 // id: %37
+  %26 = alloc_stack $Int, var, name "index_b"     // users: %49, %42, %36, %30, %56
+  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb5, case #EnumLayout.b!enumelt: bb6, case #EnumLayout.c!enumelt: bb7 // id: %27
 
 bb5:                                              // Preds: bb4
-  %38 = metatype $@thin Int.Type                  // user: %41
-  %39 = integer_literal $Builtin.Int2048, 0       // user: %41
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %40 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %41
-  %41 = apply %40(%39, %38) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %43
-  %42 = begin_access [modify] [unknown] %36 : $*Int // users: %44, %43
-  assign %41 to %42 : $*Int                       // id: %43
+  %28 = integer_literal $Builtin.Int64, 0         // user: %29
+  %29 = struct $Int (%28 : $Builtin.Int64)        // user: %31
+  %30 = begin_access [modify] [static] %26 : $*Int // users: %31, %32
+  store %29 to %30 : $*Int                        // id: %31
+  end_access %30 : $*Int                          // id: %32
+  br bb8                                          // id: %33
+
+bb6:                                              // Preds: bb4
+  %34 = integer_literal $Builtin.Int64, 1         // user: %35
+  %35 = struct $Int (%34 : $Builtin.Int64)        // user: %37
+  %36 = begin_access [modify] [static] %26 : $*Int // users: %37, %38
+  store %35 to %36 : $*Int                        // id: %37
+  end_access %36 : $*Int                          // id: %38
+  br bb8                                          // id: %39
+
+bb7:                                              // Preds: bb4
+  %40 = integer_literal $Builtin.Int64, 2         // user: %41
+  %41 = struct $Int (%40 : $Builtin.Int64)        // user: %43
+  %42 = begin_access [modify] [static] %26 : $*Int // users: %43, %44
+  store %41 to %42 : $*Int                        // id: %43
   end_access %42 : $*Int                          // id: %44
   br bb8                                          // id: %45
 
-bb6:                                              // Preds: bb4
-  %46 = metatype $@thin Int.Type                  // user: %49
-  %47 = integer_literal $Builtin.Int2048, 1       // user: %49
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %48 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %49
-  %49 = apply %48(%47, %46) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %51
-  %50 = begin_access [modify] [unknown] %36 : $*Int // users: %52, %51
-  assign %49 to %50 : $*Int                       // id: %51
-  end_access %50 : $*Int                          // id: %52
-  br bb8                                          // id: %53
-
-bb7:                                              // Preds: bb4
-  %54 = metatype $@thin Int.Type                  // user: %57
-  %55 = integer_literal $Builtin.Int2048, 2       // user: %57
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %56 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %57
-  %57 = apply %56(%55, %54) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %59
-  %58 = begin_access [modify] [unknown] %36 : $*Int // users: %60, %59
-  assign %57 to %58 : $*Int                       // id: %59
-  end_access %58 : $*Int                          // id: %60
-  br bb8                                          // id: %61
-
 bb8:                                              // Preds: bb7 bb6 bb5
-  %62 = metatype $@thin Int.Type                  // user: %70
-  %63 = begin_access [read] [unknown] %8 : $*Int  // users: %65, %64
-  %64 = load [trivial] %63 : $*Int                // user: %70
-  end_access %63 : $*Int                          // id: %65
-  %66 = begin_access [read] [unknown] %36 : $*Int // users: %68, %67
-  %67 = load [trivial] %66 : $*Int                // user: %70
-  end_access %66 : $*Int                          // id: %68
-  // function_ref static Int.== infix(_:_:)
-  %69 = function_ref @$SSi2eeoiySbSi_SitFZ : $@convention(method) (Int, Int, @thin Int.Type) -> Bool // user: %70
-  %70 = apply %69(%64, %67, %62) : $@convention(method) (Int, Int, @thin Int.Type) -> Bool // user: %73
-  destroy_value %35 : ${ var Int }                // id: %71
-  destroy_value %7 : ${ var Int }                 // id: %72
-  return %70 : $Bool                              // id: %73
+  %46 = begin_access [read] [static] %6 : $*Int   // users: %47, %48
+  %47 = load %46 : $*Int                          // user: %52
+  end_access %46 : $*Int                          // id: %48
+  %49 = begin_access [read] [static] %26 : $*Int  // users: %50, %51
+  %50 = load %49 : $*Int                          // user: %53
+  end_access %49 : $*Int                          // id: %51
+  %52 = struct_extract %47 : $Int, #Int._value    // user: %54
+  %53 = struct_extract %50 : $Int, #Int._value    // user: %54
+  %54 = builtin "cmp_eq_Int64"(%52 : $Builtin.Int64, %53 : $Builtin.Int64) : $Builtin.Int1 // user: %55
+  %55 = struct $Bool (%54 : $Builtin.Int1)        // user: %58
+  dealloc_stack %26 : $*Int                       // id: %56
+  dealloc_stack %6 : $*Int                        // id: %57
+  return %55 : $Bool                              // id: %58
 } // end sil function '$S7structs10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ'
 
 // static Int.== infix(_:_:)
-sil [transparent] [serialized] @$SSi2eeoiySbSi_SitFZ : $@convention(method) (Int, Int, @thin Int.Type) -> Bool
+sil public_external [transparent] [serialized] @$SSi2eeoiySbSi_SitFZ : $@convention(method) (Int, Int, @thin Int.Type) -> Bool {
+// %0                                             // user: %3
+// %1                                             // user: %4
+bb0(%0 : $Int, %1 : $Int, %2 : $@thin Int.Type):
+  %3 = struct_extract %0 : $Int, #Int._value      // user: %5
+  %4 = struct_extract %1 : $Int, #Int._value      // user: %5
+  %5 = builtin "cmp_eq_Int64"(%3 : $Builtin.Int64, %4 : $Builtin.Int64) : $Builtin.Int1 // user: %6
+  %6 = struct $Bool (%5 : $Builtin.Int1)          // user: %7
+  return %6 : $Bool                               // id: %7
+} // end sil function '$SSi2eeoiySbSi_SitFZ'
 
 // EnumLayout.hashValue.getter
 sil hidden @$S7structs10EnumLayoutO9hashValueSivg : $@convention(method) (EnumLayout) -> Int {
 // %0                                             // users: %3, %1
 bb0(%0 : $EnumLayout):
   debug_value %0 : $EnumLayout, let, name "self", argno 1 // id: %1
-  %2 = alloc_stack $EnumLayout                    // users: %6, %5, %3
-  store %0 to [trivial] %2 : $*EnumLayout         // id: %3
+  %2 = alloc_stack $EnumLayout                    // users: %3, %6, %5
+  store %0 to %2 : $*EnumLayout                   // id: %3
   // function_ref _hashValue<A>(for:)
   %4 = function_ref @$Ss10_hashValue3forSix_tSHRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %5
   %5 = apply %4<EnumLayout>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %7
@@ -955,64 +847,53 @@ bb0(%0 : $EnumLayout):
 
 // EnumLayout.hash(into:)
 sil hidden @$S7structs10EnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, EnumLayout) -> () {
-// %0                                             // users: %37, %2
-// %1                                             // users: %7, %3
+// %0                                             // users: %29, %2
+// %1                                             // users: %5, %3
 bb0(%0 : $*Hasher, %1 : $EnumLayout):
   debug_value_addr %0 : $*Hasher, var, name "hasher", argno 1 // id: %2
   debug_value %1 : $EnumLayout, let, name "self", argno 2 // id: %3
-  %4 = alloc_box ${ var Int }, var, name "discriminator" // user: %5
-  %5 = mark_uninitialized [var] %4 : ${ var Int } // users: %42, %6
-  %6 = project_box %5 : ${ var Int }, 0           // users: %32, %28, %20, %12
-  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %7
+  %4 = alloc_stack $Int, var, name "discriminator" // users: %24, %20, %14, %8, %34
+  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %5
 
 bb1:                                              // Preds: bb0
-  %8 = metatype $@thin Int.Type                   // user: %11
-  %9 = integer_literal $Builtin.Int2048, 0        // user: %11
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %10 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %11
-  %11 = apply %10(%9, %8) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %13
-  %12 = begin_access [modify] [unknown] %6 : $*Int // users: %14, %13
-  assign %11 to %12 : $*Int                       // id: %13
-  end_access %12 : $*Int                          // id: %14
-  br bb4                                          // id: %15
+  %6 = integer_literal $Builtin.Int64, 0          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %9
+  %8 = begin_access [modify] [static] %4 : $*Int  // users: %9, %10
+  store %7 to %8 : $*Int                          // id: %9
+  end_access %8 : $*Int                           // id: %10
+  br bb4                                          // id: %11
 
 bb2:                                              // Preds: bb0
-  %16 = metatype $@thin Int.Type                  // user: %19
-  %17 = integer_literal $Builtin.Int2048, 1       // user: %19
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %18 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %19
-  %19 = apply %18(%17, %16) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %21
-  %20 = begin_access [modify] [unknown] %6 : $*Int // users: %22, %21
-  assign %19 to %20 : $*Int                       // id: %21
+  %12 = integer_literal $Builtin.Int64, 1         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %15
+  %14 = begin_access [modify] [static] %4 : $*Int // users: %15, %16
+  store %13 to %14 : $*Int                        // id: %15
+  end_access %14 : $*Int                          // id: %16
+  br bb4                                          // id: %17
+
+bb3:                                              // Preds: bb0
+  %18 = integer_literal $Builtin.Int64, 2         // user: %19
+  %19 = struct $Int (%18 : $Builtin.Int64)        // user: %21
+  %20 = begin_access [modify] [static] %4 : $*Int // users: %21, %22
+  store %19 to %20 : $*Int                        // id: %21
   end_access %20 : $*Int                          // id: %22
   br bb4                                          // id: %23
 
-bb3:                                              // Preds: bb0
-  %24 = metatype $@thin Int.Type                  // user: %27
-  %25 = integer_literal $Builtin.Int2048, 2       // user: %27
-  // function_ref Int.init(_builtinIntegerLiteral:)
-  %26 = function_ref @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %27
-  %27 = apply %26(%25, %24) : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int // user: %29
-  %28 = begin_access [modify] [unknown] %6 : $*Int // users: %30, %29
-  assign %27 to %28 : $*Int                       // id: %29
-  end_access %28 : $*Int                          // id: %30
-  br bb4                                          // id: %31
-
 bb4:                                              // Preds: bb3 bb2 bb1
-  %32 = begin_access [read] [unknown] %6 : $*Int  // users: %34, %33
-  %33 = load [trivial] %32 : $*Int                // user: %36
-  end_access %32 : $*Int                          // id: %34
-  %35 = alloc_stack $Int                          // users: %41, %39, %36
-  store %33 to [trivial] %35 : $*Int              // id: %36
-  %37 = begin_access [modify] [unknown] %0 : $*Hasher // users: %40, %39
+  %24 = begin_access [read] [static] %4 : $*Int   // users: %25, %26
+  %25 = load %24 : $*Int                          // user: %28
+  end_access %24 : $*Int                          // id: %26
+  %27 = alloc_stack $Int                          // users: %28, %33, %31
+  store %25 to %27 : $*Int                        // id: %28
+  %29 = begin_access [modify] [static] %0 : $*Hasher // users: %32, %31
   // function_ref Hasher.combine<A>(_:)
-  %38 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %39
-  %39 = apply %38<Int>(%35, %37) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
-  end_access %37 : $*Hasher                       // id: %40
-  dealloc_stack %35 : $*Int                       // id: %41
-  destroy_value %5 : ${ var Int }                 // id: %42
-  %43 = tuple ()                                  // user: %44
-  return %43 : $()                                // id: %44
+  %30 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %31
+  %31 = apply %30<Int>(%27, %29) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
+  end_access %29 : $*Hasher                       // id: %32
+  dealloc_stack %27 : $*Int                       // id: %33
+  dealloc_stack %4 : $*Int                        // id: %34
+  %35 = tuple ()                                  // user: %36
+  return %35 : $()                                // id: %36
 } // end sil function '$S7structs10EnumLayoutO4hash4intoys6HasherVz_tF'
 
 // protocol witness for static Equatable.== infix(_:_:) in conformance EnumLayout
@@ -1020,8 +901,8 @@ sil private [transparent] [thunk] @$S7structs10EnumLayoutOSQAASQ2eeoiySbx_xtFZTW
 // %0                                             // user: %3
 // %1                                             // user: %4
 bb0(%0 : $*EnumLayout, %1 : $*EnumLayout, %2 : $@thick EnumLayout.Type):
-  %3 = load [trivial] %0 : $*EnumLayout           // user: %7
-  %4 = load [trivial] %1 : $*EnumLayout           // user: %7
+  %3 = load %0 : $*EnumLayout                     // user: %7
+  %4 = load %1 : $*EnumLayout                     // user: %7
   %5 = metatype $@thin EnumLayout.Type            // user: %7
   // function_ref static EnumLayout.__derived_enum_equals(_:_:)
   %6 = function_ref @$S7structs10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ : $@convention(method) (EnumLayout, EnumLayout, @thin EnumLayout.Type) -> Bool // user: %7
@@ -1033,7 +914,7 @@ bb0(%0 : $*EnumLayout, %1 : $*EnumLayout, %2 : $@thick EnumLayout.Type):
 sil private [transparent] [thunk] @$S7structs10EnumLayoutOSHAASH9hashValueSivgTW : $@convention(witness_method: Hashable) (@in_guaranteed EnumLayout) -> Int {
 // %0                                             // user: %1
 bb0(%0 : $*EnumLayout):
-  %1 = load [trivial] %0 : $*EnumLayout           // user: %3
+  %1 = load %0 : $*EnumLayout                     // user: %3
   // function_ref EnumLayout.hashValue.getter
   %2 = function_ref @$S7structs10EnumLayoutO9hashValueSivg : $@convention(method) (EnumLayout) -> Int // user: %3
   %3 = apply %2(%1) : $@convention(method) (EnumLayout) -> Int // user: %4
@@ -1045,7 +926,7 @@ sil private [transparent] [thunk] @$S7structs10EnumLayoutOSHAASH4hash4intoys6Has
 // %0                                             // user: %4
 // %1                                             // user: %2
 bb0(%0 : $*Hasher, %1 : $*EnumLayout):
-  %2 = load [trivial] %1 : $*EnumLayout           // user: %4
+  %2 = load %1 : $*EnumLayout                     // user: %4
   // function_ref EnumLayout.hash(into:)
   %3 = function_ref @$S7structs10EnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, EnumLayout) -> () // user: %4
   %4 = apply %3(%0, %2) : $@convention(method) (@inout Hasher, EnumLayout) -> ()
@@ -1054,19 +935,67 @@ bb0(%0 : $*Hasher, %1 : $*EnumLayout):
 } // end sil function '$S7structs10EnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW'
 
 // Int64.init(_builtinIntegerLiteral:)
-sil [transparent] [serialized] @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64
+sil public_external [transparent] [serialized] @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int64.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int64"(%0 : $Builtin.Int2048) : $(Builtin.Int64, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int64 (%3 : $Builtin.Int64)        // user: %5
+  return %4 : $Int64                              // id: %5
+} // end sil function '$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC'
 
 // Double.init(_builtinFloatLiteral:)
-sil [transparent] [serialized] @$SSd20_builtinFloatLiteralSdBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double
+sil public_external [transparent] [serialized] @$SSd20_builtinFloatLiteralSdBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.FPIEEE80, %1 : $@thin Double.Type):
+  %2 = builtin "fptrunc_FPIEEE80_FPIEEE64"(%0 : $Builtin.FPIEEE80) : $Builtin.FPIEEE64 // user: %3
+  %3 = struct $Double (%2 : $Builtin.FPIEEE64)    // user: %4
+  return %3 : $Double                             // id: %4
+} // end sil function '$SSd20_builtinFloatLiteralSdBf80__tcfC'
 
 // Int32.init(_builtinIntegerLiteral:)
-sil [transparent] [serialized] @$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int32.Type) -> Int32
+sil public_external [transparent] [serialized] @$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int32.Type) -> Int32 {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int32.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int32"(%0 : $Builtin.Int2048) : $(Builtin.Int32, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int32, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int32 (%3 : $Builtin.Int32)        // user: %5
+  return %4 : $Int32                              // id: %5
+} // end sil function '$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC'
 
 // Bool.init(_builtinBooleanLiteral:)
-sil [transparent] [serialized] @$SSb22_builtinBooleanLiteralSbBi1__tcfC : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool
+sil public_external [transparent] [serialized] @$SSb22_builtinBooleanLiteralSbBi1__tcfC : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int1, %1 : $@thin Bool.Type):
+  %2 = struct $Bool (%0 : $Builtin.Int1)          // user: %3
+  return %2 : $Bool                               // id: %3
+} // end sil function '$SSb22_builtinBooleanLiteralSbBi1__tcfC'
 
 // Float.init(_builtinFloatLiteral:)
-sil [transparent] [serialized] @$SSf20_builtinFloatLiteralSfBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float
+sil public_external [transparent] [serialized] @$SSf20_builtinFloatLiteralSfBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.FPIEEE80, %1 : $@thin Float.Type):
+  %2 = builtin "fptrunc_FPIEEE80_FPIEEE32"(%0 : $Builtin.FPIEEE80) : $Builtin.FPIEEE32 // user: %3
+  %3 = struct $Float (%2 : $Builtin.FPIEEE32)     // user: %4
+  return %3 : $Float                              // id: %4
+} // end sil function '$SSf20_builtinFloatLiteralSfBf80__tcfC'
+
+// protocol witness for static Equatable.== infix(_:_:) in conformance Int
+sil shared_external [transparent] [serialized] [thunk] @$SSiSQsSQ2eeoiySbx_xtFZTW : $@convention(witness_method: Equatable) (@in_guaranteed Int, @in_guaranteed Int, @thick Int.Type) -> Bool {
+// %0                                             // user: %3
+// %1                                             // user: %5
+bb0(%0 : $*Int, %1 : $*Int, %2 : $@thick Int.Type):
+  %3 = struct_element_addr %0 : $*Int, #Int._value // user: %4
+  %4 = load %3 : $*Builtin.Int64                  // user: %7
+  %5 = struct_element_addr %1 : $*Int, #Int._value // user: %6
+  %6 = load %5 : $*Builtin.Int64                  // user: %7
+  %7 = builtin "cmp_eq_Int64"(%4 : $Builtin.Int64, %6 : $Builtin.Int64) : $Builtin.Int1 // user: %8
+  %8 = struct $Bool (%7 : $Builtin.Int1)          // user: %9
+  return %8 : $Bool                               // id: %9
+} // end sil function '$SSiSQsSQ2eeoiySbx_xtFZTW'
+
+// specialized _allocateUninitializedArray<A>(_:)
+sil [always_inline] @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer)
 
 sil_witness_table hidden RawEnumLayout: Equatable module structs {
   method #Equatable."=="!1: <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : @$S7structs13RawEnumLayoutOSQAASQ2eeoiySbx_xtFZTW	// protocol witness for static Equatable.== infix(_:_:) in conformance RawEnumLayout
@@ -1092,6 +1021,10 @@ sil_witness_table hidden EnumLayout: Hashable module structs {
   base_protocol Equatable: EnumLayout: Equatable module structs
   method #Hashable.hashValue!getter.1: <Self where Self : Hashable> (Self) -> () -> Int : @$S7structs10EnumLayoutOSHAASH9hashValueSivgTW	// protocol witness for Hashable.hashValue.getter in conformance EnumLayout
   method #Hashable.hash!1: <Self where Self : Hashable> (Self) -> (inout Hasher) -> () : @$S7structs10EnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW	// protocol witness for Hashable.hash(into:) in conformance EnumLayout
+}
+
+sil_witness_table public_external [serialized] Int: Equatable module Swift {
+  method #Equatable."=="!1: <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : @$SSiSQsSQ2eeoiySbx_xtFZTW	// protocol witness for static Equatable.== infix(_:_:) in conformance Int
 }
 
 

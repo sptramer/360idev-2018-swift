@@ -1,0 +1,1031 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+public struct StructLayouts {
+  @sil_stored private let var5: Double
+  @sil_stored public var var3: Float { get set }
+  @sil_stored public var var1: Bool { get set }
+  @sil_stored public let var2: Int64
+  @sil_stored fileprivate var var4: Int64 { get set }
+  init(_ var1: Bool, _ var2: Int64, _ var3: Float, _ var4: Int64, _ var5: Double)
+  public func f1()
+  private func f2()
+}
+
+typealias LongTuple = (Int64, Double, Int32, Bool)
+
+enum RawEnumLayout : Int {
+  case one
+  case two
+  case three
+  case four
+  typealias RawValue = Int
+  var hashValue: Int { get }
+  func hash(into hasher: inout Hasher)
+  init?(rawValue: Int)
+  var rawValue: Int { get }
+}
+
+enum EnumLayout {
+  case a
+  case b
+  case c
+  func whatAmI()
+  @_implements(Equatable, ==(_:_:)) static func __derived_enum_equals(_ a: EnumLayout, _ b: EnumLayout) -> Bool
+  var hashValue: Int { get }
+  func hash(into hasher: inout Hasher)
+}
+
+let rawVal: RawEnumLayout
+
+let enumVal: EnumLayout
+
+let tupleVal: (Int64, Double, Int32, Bool)
+
+let structLayout: StructLayouts
+
+// rawVal
+sil_global hidden [let] @$S4main6rawValAA13RawEnumLayoutOvp : $RawEnumLayout
+
+// enumVal
+sil_global hidden [let] @$S4main7enumValAA10EnumLayoutOvp : $EnumLayout
+
+// tupleVal
+sil_global hidden [let] @$S4main8tupleVals5Int64V_Sds5Int32VSbtvp : $(Int64, Double, Int32, Bool)
+
+// structLayout
+sil_global hidden [let] @$S4main12structLayoutAA13StructLayoutsVvp : $StructLayouts
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  alloc_global @$S4main6rawValAA13RawEnumLayoutOvp // id: %2
+  %3 = global_addr @$S4main6rawValAA13RawEnumLayoutOvp : $*RawEnumLayout // user: %6
+  %4 = metatype $@thin RawEnumLayout.Type
+  %5 = enum $RawEnumLayout, #RawEnumLayout.one!enumelt // user: %6
+  store %5 to %3 : $*RawEnumLayout                // id: %6
+  alloc_global @$S4main7enumValAA10EnumLayoutOvp  // id: %7
+  %8 = global_addr @$S4main7enumValAA10EnumLayoutOvp : $*EnumLayout // user: %11
+  %9 = metatype $@thin EnumLayout.Type
+  %10 = enum $EnumLayout, #EnumLayout.b!enumelt   // user: %11
+  store %10 to %8 : $*EnumLayout                  // id: %11
+  alloc_global @$S4main8tupleVals5Int64V_Sds5Int32VSbtvp // id: %12
+  %13 = global_addr @$S4main8tupleVals5Int64V_Sds5Int32VSbtvp : $*(Int64, Double, Int32, Bool) // user: %23
+  %14 = integer_literal $Builtin.Int64, 1         // user: %15
+  %15 = struct $Int64 (%14 : $Builtin.Int64)      // user: %22
+  %16 = float_literal $Builtin.FPIEEE64, 0x3FF0000000000000 // 1 // user: %17
+  %17 = struct $Double (%16 : $Builtin.FPIEEE64)  // user: %22
+  %18 = integer_literal $Builtin.Int32, 1         // user: %19
+  %19 = struct $Int32 (%18 : $Builtin.Int32)      // user: %22
+  %20 = integer_literal $Builtin.Int1, 0          // user: %21
+  %21 = struct $Bool (%20 : $Builtin.Int1)        // user: %22
+  %22 = tuple (%15 : $Int64, %17 : $Double, %19 : $Int32, %21 : $Bool) // user: %23
+  store %22 to %13 : $*(Int64, Double, Int32, Bool) // id: %23
+  alloc_global @$S4main12structLayoutAA13StructLayoutsVvp // id: %24
+  %25 = global_addr @$S4main12structLayoutAA13StructLayoutsVvp : $*StructLayouts // user: %39
+  %26 = metatype $@thin StructLayouts.Type        // user: %38
+  %27 = integer_literal $Builtin.Int1, -1         // user: %28
+  %28 = struct $Bool (%27 : $Builtin.Int1)        // user: %38
+  %29 = integer_literal $Builtin.Int64, 1         // user: %30
+  %30 = struct $Int64 (%29 : $Builtin.Int64)      // user: %38
+  %31 = float_literal $Builtin.FPIEEE32, 0x3F800000 // 1 // user: %32
+  %32 = struct $Float (%31 : $Builtin.FPIEEE32)   // user: %38
+  %33 = integer_literal $Builtin.Int64, 1         // user: %34
+  %34 = struct $Int64 (%33 : $Builtin.Int64)      // user: %38
+  %35 = float_literal $Builtin.FPIEEE64, 0x3FF0000000000000 // 1 // user: %36
+  %36 = struct $Double (%35 : $Builtin.FPIEEE64)  // user: %38
+  // function_ref StructLayouts.init(_:_:_:_:_:)
+  %37 = function_ref @$S4main13StructLayoutsVyACSb_s5Int64VSfAESdtcfC : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %38
+  %38 = apply %37(%28, %30, %32, %34, %36, %26) : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts // user: %39
+  store %38 to %25 : $*StructLayouts              // id: %39
+  %40 = integer_literal $Builtin.Int32, 0         // user: %41
+  %41 = struct $Int32 (%40 : $Builtin.Int32)      // user: %42
+  return %41 : $Int32                             // id: %42
+} // end sil function 'main'
+
+// StructLayouts.var3.getter
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var3Sfvg : $@convention(method) (StructLayouts) -> Float {
+// %0                                             // users: %2, %1
+bb0(%0 : $StructLayouts):
+  debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
+  %2 = struct_extract %0 : $StructLayouts, #StructLayouts.var3 // user: %3
+  return %2 : $Float                              // id: %3
+} // end sil function '$S4main13StructLayoutsV4var3Sfvg'
+
+// StructLayouts.var3.setter
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var3Sfvs : $@convention(method) (Float, @inout StructLayouts) -> () {
+// %0                                             // users: %6, %2
+// %1                                             // users: %4, %3
+bb0(%0 : $Float, %1 : $*StructLayouts):
+  debug_value %0 : $Float, let, name "value", argno 1 // id: %2
+  debug_value_addr %1 : $*StructLayouts, var, name "self", argno 2 // id: %3
+  %4 = begin_access [modify] [static] %1 : $*StructLayouts // users: %7, %5
+  %5 = struct_element_addr %4 : $*StructLayouts, #StructLayouts.var3 // user: %6
+  store %0 to %5 : $*Float                        // id: %6
+  end_access %4 : $*StructLayouts                 // id: %7
+  %8 = tuple ()                                   // user: %9
+  return %8 : $()                                 // id: %9
+} // end sil function '$S4main13StructLayoutsV4var3Sfvs'
+
+// StructLayouts.var3.materializeForSet
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var3Sfvm : $@convention(method) (Builtin.RawPointer, @inout Builtin.UnsafeValueBuffer, @inout StructLayouts) -> (Builtin.RawPointer, Optional<Builtin.RawPointer>) {
+// %2                                             // user: %3
+bb0(%0 : $Builtin.RawPointer, %1 : $*Builtin.UnsafeValueBuffer, %2 : $*StructLayouts):
+  %3 = struct_element_addr %2 : $*StructLayouts, #StructLayouts.var3 // user: %4
+  %4 = address_to_pointer %3 : $*Float to $Builtin.RawPointer // user: %6
+  %5 = enum $Optional<Builtin.RawPointer>, #Optional.none!enumelt // user: %6
+  %6 = tuple (%4 : $Builtin.RawPointer, %5 : $Optional<Builtin.RawPointer>) // user: %7
+  return %6 : $(Builtin.RawPointer, Optional<Builtin.RawPointer>) // id: %7
+} // end sil function '$S4main13StructLayoutsV4var3Sfvm'
+
+// StructLayouts.var1.getter
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var1Sbvg : $@convention(method) (StructLayouts) -> Bool {
+// %0                                             // users: %2, %1
+bb0(%0 : $StructLayouts):
+  debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
+  %2 = struct_extract %0 : $StructLayouts, #StructLayouts.var1 // user: %3
+  return %2 : $Bool                               // id: %3
+} // end sil function '$S4main13StructLayoutsV4var1Sbvg'
+
+// StructLayouts.var1.setter
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var1Sbvs : $@convention(method) (Bool, @inout StructLayouts) -> () {
+// %0                                             // users: %6, %2
+// %1                                             // users: %4, %3
+bb0(%0 : $Bool, %1 : $*StructLayouts):
+  debug_value %0 : $Bool, let, name "value", argno 1 // id: %2
+  debug_value_addr %1 : $*StructLayouts, var, name "self", argno 2 // id: %3
+  %4 = begin_access [modify] [static] %1 : $*StructLayouts // users: %7, %5
+  %5 = struct_element_addr %4 : $*StructLayouts, #StructLayouts.var1 // user: %6
+  store %0 to %5 : $*Bool                         // id: %6
+  end_access %4 : $*StructLayouts                 // id: %7
+  %8 = tuple ()                                   // user: %9
+  return %8 : $()                                 // id: %9
+} // end sil function '$S4main13StructLayoutsV4var1Sbvs'
+
+// StructLayouts.var1.materializeForSet
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var1Sbvm : $@convention(method) (Builtin.RawPointer, @inout Builtin.UnsafeValueBuffer, @inout StructLayouts) -> (Builtin.RawPointer, Optional<Builtin.RawPointer>) {
+// %2                                             // user: %3
+bb0(%0 : $Builtin.RawPointer, %1 : $*Builtin.UnsafeValueBuffer, %2 : $*StructLayouts):
+  %3 = struct_element_addr %2 : $*StructLayouts, #StructLayouts.var1 // user: %4
+  %4 = address_to_pointer %3 : $*Bool to $Builtin.RawPointer // user: %6
+  %5 = enum $Optional<Builtin.RawPointer>, #Optional.none!enumelt // user: %6
+  %6 = tuple (%4 : $Builtin.RawPointer, %5 : $Optional<Builtin.RawPointer>) // user: %7
+  return %6 : $(Builtin.RawPointer, Optional<Builtin.RawPointer>) // id: %7
+} // end sil function '$S4main13StructLayoutsV4var1Sbvm'
+
+// StructLayouts.var2.getter
+sil [transparent] [serialized] @$S4main13StructLayoutsV4var2s5Int64Vvg : $@convention(method) (StructLayouts) -> Int64 {
+// %0                                             // users: %2, %1
+bb0(%0 : $StructLayouts):
+  debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
+  %2 = struct_extract %0 : $StructLayouts, #StructLayouts.var2 // user: %3
+  return %2 : $Int64                              // id: %3
+} // end sil function '$S4main13StructLayoutsV4var2s5Int64Vvg'
+
+// StructLayouts.init(_:_:_:_:_:)
+sil hidden @$S4main13StructLayoutsVyACSb_s5Int64VSfAESdtcfC : $@convention(method) (Bool, Int64, Float, Int64, Double, @thin StructLayouts.Type) -> StructLayouts {
+// %0                                             // users: %32, %14, %7
+// %1                                             // users: %32, %18, %8
+// %2                                             // users: %32, %22, %9
+// %3                                             // users: %32, %26, %10
+// %4                                             // users: %32, %30, %11
+bb0(%0 : $Bool, %1 : $Int64, %2 : $Float, %3 : $Int64, %4 : $Double, %5 : $@thin StructLayouts.Type):
+  %6 = alloc_stack $StructLayouts, var, name "self" // users: %28, %24, %20, %16, %12, %33
+  debug_value %0 : $Bool, let, name "var1", argno 1 // id: %7
+  debug_value %1 : $Int64, let, name "var2", argno 2 // id: %8
+  debug_value %2 : $Float, let, name "var3", argno 3 // id: %9
+  debug_value %3 : $Int64, let, name "var4", argno 4 // id: %10
+  debug_value %4 : $Double, let, name "var5", argno 5 // id: %11
+  %12 = begin_access [modify] [static] %6 : $*StructLayouts // users: %15, %13
+  %13 = struct_element_addr %12 : $*StructLayouts, #StructLayouts.var1 // user: %14
+  store %0 to %13 : $*Bool                        // id: %14
+  end_access %12 : $*StructLayouts                // id: %15
+  %16 = begin_access [modify] [static] %6 : $*StructLayouts // users: %19, %17
+  %17 = struct_element_addr %16 : $*StructLayouts, #StructLayouts.var2 // user: %18
+  store %1 to %17 : $*Int64                       // id: %18
+  end_access %16 : $*StructLayouts                // id: %19
+  %20 = begin_access [modify] [static] %6 : $*StructLayouts // users: %23, %21
+  %21 = struct_element_addr %20 : $*StructLayouts, #StructLayouts.var3 // user: %22
+  store %2 to %21 : $*Float                       // id: %22
+  end_access %20 : $*StructLayouts                // id: %23
+  %24 = begin_access [modify] [static] %6 : $*StructLayouts // users: %27, %25
+  %25 = struct_element_addr %24 : $*StructLayouts, #StructLayouts.var4 // user: %26
+  store %3 to %25 : $*Int64                       // id: %26
+  end_access %24 : $*StructLayouts                // id: %27
+  %28 = begin_access [modify] [static] %6 : $*StructLayouts // users: %31, %29
+  %29 = struct_element_addr %28 : $*StructLayouts, #StructLayouts.var5 // user: %30
+  store %4 to %29 : $*Double                      // id: %30
+  end_access %28 : $*StructLayouts                // id: %31
+  %32 = struct $StructLayouts (%4 : $Double, %2 : $Float, %0 : $Bool, %1 : $Int64, %3 : $Int64) // user: %34
+  dealloc_stack %6 : $*StructLayouts              // id: %33
+  return %32 : $StructLayouts                     // id: %34
+} // end sil function '$S4main13StructLayoutsVyACSb_s5Int64VSfAESdtcfC'
+
+// StructLayouts.f1()
+sil @$S4main13StructLayoutsV2f1yyF : $@convention(method) (StructLayouts) -> () {
+// %0                                             // user: %1
+bb0(%0 : $StructLayouts):
+  debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %4
+  %4 = apply %3(%2) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %7, %5, %8
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // users: %26, %23, %6
+  retain_value %5 : $Array<Any>                   // id: %6
+  %7 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %9
+  release_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %8
+  %9 = pointer_to_address %7 : $Builtin.RawPointer to [strict] $*Any // user: %10
+  %10 = init_existential_addr %9 : $*Any, $String // user: %17
+  %11 = string_literal utf8 "hi"                  // user: %16
+  %12 = integer_literal $Builtin.Word, 2          // user: %16
+  %13 = integer_literal $Builtin.Int1, -1         // user: %16
+  %14 = metatype $@thin String.Type               // user: %16
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %15 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %16
+  %16 = apply %15(%11, %12, %13, %14) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  store %16 to %10 : $*String                     // id: %17
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%5, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %5 : $Array<Any>                  // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$S4main13StructLayoutsV2f1yyF'
+
+// _allocateUninitializedArray<A>(_:)
+sil [serialized] [always_inline] @$Ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer)
+
+// String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+sil [serialized] [always_inline] [readonly] [_semantics "string.makeUTF8"] @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
+
+// default argument 1 of print(_:separator:terminator:)
+sil [noinline] @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String
+
+// default argument 2 of print(_:separator:terminator:)
+sil [noinline] @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String
+
+// print(_:separator:terminator:)
+sil [noinline] @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+
+// StructLayouts.f2()
+sil private @$S4main13StructLayoutsV2f233_6D564FD86350D0E3BE60A1DF9AE346E2LLyyF : $@convention(method) (StructLayouts) -> () {
+// %0                                             // user: %1
+bb0(%0 : $StructLayouts):
+  debug_value %0 : $StructLayouts, let, name "self", argno 1 // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %4
+  %4 = apply %3(%2) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %7, %5, %8
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // users: %26, %23, %6
+  retain_value %5 : $Array<Any>                   // id: %6
+  %7 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %9
+  release_value %4 : $(Array<Any>, Builtin.RawPointer) // id: %8
+  %9 = pointer_to_address %7 : $Builtin.RawPointer to [strict] $*Any // user: %10
+  %10 = init_existential_addr %9 : $*Any, $String // user: %17
+  %11 = string_literal utf8 "yo"                  // user: %16
+  %12 = integer_literal $Builtin.Word, 2          // user: %16
+  %13 = integer_literal $Builtin.Int1, -1         // user: %16
+  %14 = metatype $@thin String.Type               // user: %16
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %15 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %16
+  %16 = apply %15(%11, %12, %13, %14) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  store %16 to %10 : $*String                     // id: %17
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%5, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %5 : $Array<Any>                  // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$S4main13StructLayoutsV2f233_6D564FD86350D0E3BE60A1DF9AE346E2LLyyF'
+
+// RawEnumLayout.hashValue.getter
+sil hidden @$S4main13RawEnumLayoutO9hashValueSivg : $@convention(method) (RawEnumLayout) -> Int {
+// %0                                             // users: %3, %1
+bb0(%0 : $RawEnumLayout):
+  debug_value %0 : $RawEnumLayout, let, name "self", argno 1 // id: %1
+  %2 = alloc_stack $RawEnumLayout                 // users: %3, %6, %5
+  store %0 to %2 : $*RawEnumLayout                // id: %3
+  // function_ref _hashValue<A>(for:)
+  %4 = function_ref @$Ss10_hashValue3forSix_tSHRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %5
+  %5 = apply %4<RawEnumLayout>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %7
+  dealloc_stack %2 : $*RawEnumLayout              // id: %6
+  return %5 : $Int                                // id: %7
+} // end sil function '$S4main13RawEnumLayoutO9hashValueSivg'
+
+// _hashValue<A>(for:)
+sil [serialized] [always_inline] @$Ss10_hashValue3forSix_tSHRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int
+
+// RawEnumLayout.hash(into:)
+sil hidden @$S4main13RawEnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, RawEnumLayout) -> () {
+// %0                                             // users: %35, %2
+// %1                                             // users: %5, %3
+bb0(%0 : $*Hasher, %1 : $RawEnumLayout):
+  debug_value_addr %0 : $*Hasher, var, name "hasher", argno 1 // id: %2
+  debug_value %1 : $RawEnumLayout, let, name "self", argno 2 // id: %3
+  %4 = alloc_stack $Int, var, name "discriminator" // users: %30, %26, %20, %14, %8, %40
+  switch_enum %1 : $RawEnumLayout, case #RawEnumLayout.one!enumelt: bb1, case #RawEnumLayout.two!enumelt: bb2, case #RawEnumLayout.three!enumelt: bb3, case #RawEnumLayout.four!enumelt: bb4 // id: %5
+
+bb1:                                              // Preds: bb0
+  %6 = integer_literal $Builtin.Int64, 0          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %9
+  %8 = begin_access [modify] [static] %4 : $*Int  // users: %9, %10
+  store %7 to %8 : $*Int                          // id: %9
+  end_access %8 : $*Int                           // id: %10
+  br bb5                                          // id: %11
+
+bb2:                                              // Preds: bb0
+  %12 = integer_literal $Builtin.Int64, 1         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %15
+  %14 = begin_access [modify] [static] %4 : $*Int // users: %15, %16
+  store %13 to %14 : $*Int                        // id: %15
+  end_access %14 : $*Int                          // id: %16
+  br bb5                                          // id: %17
+
+bb3:                                              // Preds: bb0
+  %18 = integer_literal $Builtin.Int64, 2         // user: %19
+  %19 = struct $Int (%18 : $Builtin.Int64)        // user: %21
+  %20 = begin_access [modify] [static] %4 : $*Int // users: %21, %22
+  store %19 to %20 : $*Int                        // id: %21
+  end_access %20 : $*Int                          // id: %22
+  br bb5                                          // id: %23
+
+bb4:                                              // Preds: bb0
+  %24 = integer_literal $Builtin.Int64, 3         // user: %25
+  %25 = struct $Int (%24 : $Builtin.Int64)        // user: %27
+  %26 = begin_access [modify] [static] %4 : $*Int // users: %27, %28
+  store %25 to %26 : $*Int                        // id: %27
+  end_access %26 : $*Int                          // id: %28
+  br bb5                                          // id: %29
+
+bb5:                                              // Preds: bb4 bb3 bb2 bb1
+  %30 = begin_access [read] [static] %4 : $*Int   // users: %31, %32
+  %31 = load %30 : $*Int                          // user: %34
+  end_access %30 : $*Int                          // id: %32
+  %33 = alloc_stack $Int                          // users: %34, %39, %37
+  store %31 to %33 : $*Int                        // id: %34
+  %35 = begin_access [modify] [static] %0 : $*Hasher // users: %38, %37
+  // function_ref Hasher.combine<A>(_:)
+  %36 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %37
+  %37 = apply %36<Int>(%33, %35) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
+  end_access %35 : $*Hasher                       // id: %38
+  dealloc_stack %33 : $*Int                       // id: %39
+  dealloc_stack %4 : $*Int                        // id: %40
+  %41 = tuple ()                                  // user: %42
+  return %41 : $()                                // id: %42
+} // end sil function '$S4main13RawEnumLayoutO4hash4intoys6HasherVz_tF'
+
+// Int.init(_builtinIntegerLiteral:)
+sil public_external [transparent] [serialized] @$SSi22_builtinIntegerLiteralSiBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int.Type) -> Int {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int64"(%0 : $Builtin.Int2048) : $(Builtin.Int64, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %5
+  return %4 : $Int                                // id: %5
+} // end sil function '$SSi22_builtinIntegerLiteralSiBi2048__tcfC'
+
+// Hasher.combine<A>(_:)
+sil [serialized] [always_inline] @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
+
+// RawEnumLayout.init(rawValue:)
+sil hidden @$S4main13RawEnumLayoutO8rawValueACSgSi_tcfC : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> {
+// %0                                             // users: %48, %34, %20, %6, %46, %32, %18, %4, %3
+bb0(%0 : $Int, %1 : $@thin RawEnumLayout.Type):
+  %2 = alloc_stack $RawEnumLayout, var, name "self" // users: %61, %55, %41, %27, %13, %63, %65
+  debug_value %0 : $Int, let, name "rawValue", argno 1 // id: %3
+  debug_value %0 : $Int, let, name "$match"       // id: %4
+  %5 = integer_literal $Builtin.Int64, 1          // user: %7
+  %6 = struct_extract %0 : $Int, #Int._value      // user: %7
+  %7 = builtin "cmp_eq_Int64"(%5 : $Builtin.Int64, %6 : $Builtin.Int64) : $Builtin.Int1 // user: %8
+  %8 = struct $Bool (%7 : $Builtin.Int1)          // user: %9
+  %9 = struct_extract %8 : $Bool, #Bool._value    // user: %10
+  cond_br %9, bb1, bb2                            // id: %10
+
+bb1:                                              // Preds: bb0
+  %11 = metatype $@thin RawEnumLayout.Type
+  %12 = enum $RawEnumLayout, #RawEnumLayout.one!enumelt // user: %14
+  %13 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %14, %15
+  store %12 to %13 : $*RawEnumLayout              // id: %14
+  end_access %13 : $*RawEnumLayout                // id: %15
+  br bb13                                         // id: %16
+
+bb2:                                              // Preds: bb0
+  br bb3                                          // id: %17
+
+bb3:                                              // Preds: bb2
+  debug_value %0 : $Int, let, name "$match"       // id: %18
+  %19 = integer_literal $Builtin.Int64, 2         // user: %21
+  %20 = struct_extract %0 : $Int, #Int._value     // user: %21
+  %21 = builtin "cmp_eq_Int64"(%19 : $Builtin.Int64, %20 : $Builtin.Int64) : $Builtin.Int1 // user: %22
+  %22 = struct $Bool (%21 : $Builtin.Int1)        // user: %23
+  %23 = struct_extract %22 : $Bool, #Bool._value  // user: %24
+  cond_br %23, bb4, bb5                           // id: %24
+
+bb4:                                              // Preds: bb3
+  %25 = metatype $@thin RawEnumLayout.Type
+  %26 = enum $RawEnumLayout, #RawEnumLayout.two!enumelt // user: %28
+  %27 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %28, %29
+  store %26 to %27 : $*RawEnumLayout              // id: %28
+  end_access %27 : $*RawEnumLayout                // id: %29
+  br bb13                                         // id: %30
+
+bb5:                                              // Preds: bb3
+  br bb6                                          // id: %31
+
+bb6:                                              // Preds: bb5
+  debug_value %0 : $Int, let, name "$match"       // id: %32
+  %33 = integer_literal $Builtin.Int64, 3         // user: %35
+  %34 = struct_extract %0 : $Int, #Int._value     // user: %35
+  %35 = builtin "cmp_eq_Int64"(%33 : $Builtin.Int64, %34 : $Builtin.Int64) : $Builtin.Int1 // user: %36
+  %36 = struct $Bool (%35 : $Builtin.Int1)        // user: %37
+  %37 = struct_extract %36 : $Bool, #Bool._value  // user: %38
+  cond_br %37, bb7, bb8                           // id: %38
+
+bb7:                                              // Preds: bb6
+  %39 = metatype $@thin RawEnumLayout.Type
+  %40 = enum $RawEnumLayout, #RawEnumLayout.three!enumelt // user: %42
+  %41 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %42, %43
+  store %40 to %41 : $*RawEnumLayout              // id: %42
+  end_access %41 : $*RawEnumLayout                // id: %43
+  br bb13                                         // id: %44
+
+bb8:                                              // Preds: bb6
+  br bb9                                          // id: %45
+
+bb9:                                              // Preds: bb8
+  debug_value %0 : $Int, let, name "$match"       // id: %46
+  %47 = integer_literal $Builtin.Int64, 4         // user: %49
+  %48 = struct_extract %0 : $Int, #Int._value     // user: %49
+  %49 = builtin "cmp_eq_Int64"(%47 : $Builtin.Int64, %48 : $Builtin.Int64) : $Builtin.Int1 // user: %50
+  %50 = struct $Bool (%49 : $Builtin.Int1)        // user: %51
+  %51 = struct_extract %50 : $Bool, #Bool._value  // user: %52
+  cond_br %51, bb10, bb11                         // id: %52
+
+bb10:                                             // Preds: bb9
+  %53 = metatype $@thin RawEnumLayout.Type
+  %54 = enum $RawEnumLayout, #RawEnumLayout.four!enumelt // user: %56
+  %55 = begin_access [modify] [static] %2 : $*RawEnumLayout // users: %56, %57
+  store %54 to %55 : $*RawEnumLayout              // id: %56
+  end_access %55 : $*RawEnumLayout                // id: %57
+  br bb13                                         // id: %58
+
+bb11:                                             // Preds: bb9
+  br bb12                                         // id: %59
+
+bb12:                                             // Preds: bb11
+  br bb14                                         // id: %60
+
+bb13:                                             // Preds: bb10 bb7 bb4 bb1
+  %61 = load %2 : $*RawEnumLayout                 // user: %62
+  %62 = enum $Optional<RawEnumLayout>, #Optional.some!enumelt.1, %61 : $RawEnumLayout // user: %64
+  dealloc_stack %2 : $*RawEnumLayout              // id: %63
+  br bb15(%62 : $Optional<RawEnumLayout>)         // id: %64
+
+bb14:                                             // Preds: bb12
+  dealloc_stack %2 : $*RawEnumLayout              // id: %65
+  %66 = enum $Optional<RawEnumLayout>, #Optional.none!enumelt // user: %67
+  br bb15(%66 : $Optional<RawEnumLayout>)         // id: %67
+
+// %68                                            // user: %69
+bb15(%68 : $Optional<RawEnumLayout>):             // Preds: bb13 bb14
+  return %68 : $Optional<RawEnumLayout>           // id: %69
+} // end sil function '$S4main13RawEnumLayoutO8rawValueACSgSi_tcfC'
+
+// ~= infix<A>(_:_:)
+sil public_external [transparent] [serialized] @$Ss2teoiySbx_xtSQRzlF : $@convention(thin) <T where T : Equatable> (@in_guaranteed T, @in_guaranteed T) -> Bool {
+// %0                                             // user: %4
+// %1                                             // user: %4
+bb0(%0 : $*T, %1 : $*T):
+  %2 = metatype $@thick T.Type                    // user: %4
+  %3 = witness_method $T, #Equatable."=="!1 : <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : $@convention(witness_method: Equatable) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0, @thick τ_0_0.Type) -> Bool // user: %4
+  %4 = apply %3<T>(%0, %1, %2) : $@convention(witness_method: Equatable) <τ_0_0 where τ_0_0 : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0, @thick τ_0_0.Type) -> Bool // user: %5
+  return %4 : $Bool                               // id: %5
+} // end sil function '$Ss2teoiySbx_xtSQRzlF'
+
+// Bool._getBuiltinLogicValue()
+sil public_external [transparent] [serialized] @$SSb21_getBuiltinLogicValueBi1_yF : $@convention(method) (Bool) -> Builtin.Int1 {
+// %0                                             // user: %1
+bb0(%0 : $Bool):
+  %1 = struct_extract %0 : $Bool, #Bool._value    // user: %2
+  return %1 : $Builtin.Int1                       // id: %2
+} // end sil function '$SSb21_getBuiltinLogicValueBi1_yF'
+
+// RawEnumLayout.rawValue.getter
+sil hidden @$S4main13RawEnumLayoutO8rawValueSivg : $@convention(method) (RawEnumLayout) -> Int {
+// %0                                             // users: %2, %1
+bb0(%0 : $RawEnumLayout):
+  debug_value %0 : $RawEnumLayout, let, name "self", argno 1 // id: %1
+  switch_enum %0 : $RawEnumLayout, case #RawEnumLayout.one!enumelt: bb1, case #RawEnumLayout.two!enumelt: bb2, case #RawEnumLayout.three!enumelt: bb3, case #RawEnumLayout.four!enumelt: bb4 // id: %2
+
+bb1:                                              // Preds: bb0
+  %3 = integer_literal $Builtin.Int64, 1          // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %5
+  br bb5(%4 : $Int)                               // id: %5
+
+bb2:                                              // Preds: bb0
+  %6 = integer_literal $Builtin.Int64, 2          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %8
+  br bb5(%7 : $Int)                               // id: %8
+
+bb3:                                              // Preds: bb0
+  %9 = integer_literal $Builtin.Int64, 3          // user: %10
+  %10 = struct $Int (%9 : $Builtin.Int64)         // user: %11
+  br bb5(%10 : $Int)                              // id: %11
+
+bb4:                                              // Preds: bb0
+  %12 = integer_literal $Builtin.Int64, 4         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %14
+  br bb5(%13 : $Int)                              // id: %14
+
+// %15                                            // user: %16
+bb5(%15 : $Int):                                  // Preds: bb4 bb3 bb2 bb1
+  return %15 : $Int                               // id: %16
+} // end sil function '$S4main13RawEnumLayoutO8rawValueSivg'
+
+// protocol witness for static Equatable.== infix(_:_:) in conformance RawEnumLayout
+sil private [transparent] [thunk] @$S4main13RawEnumLayoutOSQAASQ2eeoiySbx_xtFZTW : $@convention(witness_method: Equatable) (@in_guaranteed RawEnumLayout, @in_guaranteed RawEnumLayout, @thick RawEnumLayout.Type) -> Bool {
+// %0                                             // user: %4
+// %1                                             // user: %4
+bb0(%0 : $*RawEnumLayout, %1 : $*RawEnumLayout, %2 : $@thick RawEnumLayout.Type):
+  // function_ref == infix<A>(_:_:)
+  %3 = function_ref @$Ss2eeoiySbx_xtSYRzSQ8RawValueRpzlF : $@convention(thin) <τ_0_0 where τ_0_0 : RawRepresentable, τ_0_0.RawValue : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %4
+  %4 = apply %3<RawEnumLayout, Int>(%0, %1) : $@convention(thin) <τ_0_0 where τ_0_0 : RawRepresentable, τ_0_0.RawValue : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool // user: %5
+  return %4 : $Bool                               // id: %5
+} // end sil function '$S4main13RawEnumLayoutOSQAASQ2eeoiySbx_xtFZTW'
+
+// == infix<A>(_:_:)
+sil [serialized] @$Ss2eeoiySbx_xtSYRzSQ8RawValueRpzlF : $@convention(thin) <τ_0_0 where τ_0_0 : RawRepresentable, τ_0_0.RawValue : Equatable> (@in_guaranteed τ_0_0, @in_guaranteed τ_0_0) -> Bool
+
+// protocol witness for Hashable.hashValue.getter in conformance RawEnumLayout
+sil private [transparent] [thunk] @$S4main13RawEnumLayoutOSHAASH9hashValueSivgTW : $@convention(witness_method: Hashable) (@in_guaranteed RawEnumLayout) -> Int {
+// %0                                             // user: %1
+bb0(%0 : $*RawEnumLayout):
+  %1 = load %0 : $*RawEnumLayout                  // user: %3
+  // function_ref RawEnumLayout.hashValue.getter
+  %2 = function_ref @$S4main13RawEnumLayoutO9hashValueSivg : $@convention(method) (RawEnumLayout) -> Int // user: %3
+  %3 = apply %2(%1) : $@convention(method) (RawEnumLayout) -> Int // user: %4
+  return %3 : $Int                                // id: %4
+} // end sil function '$S4main13RawEnumLayoutOSHAASH9hashValueSivgTW'
+
+// protocol witness for Hashable.hash(into:) in conformance RawEnumLayout
+sil private [transparent] [thunk] @$S4main13RawEnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW : $@convention(witness_method: Hashable) (@inout Hasher, @in_guaranteed RawEnumLayout) -> () {
+// %0                                             // user: %4
+// %1                                             // user: %2
+bb0(%0 : $*Hasher, %1 : $*RawEnumLayout):
+  %2 = load %1 : $*RawEnumLayout                  // user: %4
+  // function_ref RawEnumLayout.hash(into:)
+  %3 = function_ref @$S4main13RawEnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, RawEnumLayout) -> () // user: %4
+  %4 = apply %3(%0, %2) : $@convention(method) (@inout Hasher, RawEnumLayout) -> ()
+  %5 = tuple ()                                   // user: %6
+  return %5 : $()                                 // id: %6
+} // end sil function '$S4main13RawEnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW'
+
+// protocol witness for RawRepresentable.init(rawValue:) in conformance RawEnumLayout
+sil private [transparent] [thunk] @$S4main13RawEnumLayoutOSYAASY8rawValuexSg0bF0Qz_tcfCTW : $@convention(witness_method: RawRepresentable) (@in Int, @thick RawEnumLayout.Type) -> @out Optional<RawEnumLayout> {
+// %0                                             // user: %7
+// %1                                             // user: %3
+bb0(%0 : $*Optional<RawEnumLayout>, %1 : $*Int, %2 : $@thick RawEnumLayout.Type):
+  %3 = load %1 : $*Int                            // user: %6
+  %4 = metatype $@thin RawEnumLayout.Type         // user: %6
+  // function_ref RawEnumLayout.init(rawValue:)
+  %5 = function_ref @$S4main13RawEnumLayoutO8rawValueACSgSi_tcfC : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> // user: %6
+  %6 = apply %5(%3, %4) : $@convention(method) (Int, @thin RawEnumLayout.Type) -> Optional<RawEnumLayout> // user: %7
+  store %6 to %0 : $*Optional<RawEnumLayout>      // id: %7
+  %8 = tuple ()                                   // user: %9
+  return %8 : $()                                 // id: %9
+} // end sil function '$S4main13RawEnumLayoutOSYAASY8rawValuexSg0bF0Qz_tcfCTW'
+
+// protocol witness for RawRepresentable.rawValue.getter in conformance RawEnumLayout
+sil private [transparent] [thunk] @$S4main13RawEnumLayoutOSYAASY8rawValue0bF0QzvgTW : $@convention(witness_method: RawRepresentable) (@in_guaranteed RawEnumLayout) -> @out Int {
+// %0                                             // user: %5
+// %1                                             // user: %2
+bb0(%0 : $*Int, %1 : $*RawEnumLayout):
+  %2 = load %1 : $*RawEnumLayout                  // user: %4
+  // function_ref RawEnumLayout.rawValue.getter
+  %3 = function_ref @$S4main13RawEnumLayoutO8rawValueSivg : $@convention(method) (RawEnumLayout) -> Int // user: %4
+  %4 = apply %3(%2) : $@convention(method) (RawEnumLayout) -> Int // user: %5
+  store %4 to %0 : $*Int                          // id: %5
+  %6 = tuple ()                                   // user: %7
+  return %6 : $()                                 // id: %7
+} // end sil function '$S4main13RawEnumLayoutOSYAASY8rawValue0bF0QzvgTW'
+
+// EnumLayout.whatAmI()
+sil hidden @$S4main10EnumLayoutO7whatAmIyyF : $@convention(method) (EnumLayout) -> () {
+// %0                                             // users: %2, %1
+bb0(%0 : $EnumLayout):
+  debug_value %0 : $EnumLayout, let, name "self", argno 1 // id: %1
+  switch_enum %0 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %2
+
+bb1:                                              // Preds: bb0
+  %3 = integer_literal $Builtin.Word, 1           // user: %5
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %4 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %5
+  %5 = apply %4(%3) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %8, %6, %9
+  %6 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 0 // users: %27, %24, %7
+  retain_value %6 : $Array<Any>                   // id: %7
+  %8 = tuple_extract %5 : $(Array<Any>, Builtin.RawPointer), 1 // user: %10
+  release_value %5 : $(Array<Any>, Builtin.RawPointer) // id: %9
+  %10 = pointer_to_address %8 : $Builtin.RawPointer to [strict] $*Any // user: %11
+  %11 = init_existential_addr %10 : $*Any, $String // user: %18
+  %12 = string_literal utf8 "a"                   // user: %17
+  %13 = integer_literal $Builtin.Word, 1          // user: %17
+  %14 = integer_literal $Builtin.Int1, -1         // user: %17
+  %15 = metatype $@thin String.Type               // user: %17
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %16 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %17
+  %17 = apply %16(%12, %13, %14, %15) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %18
+  store %17 to %11 : $*String                     // id: %18
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %19 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %20
+  %20 = apply %19() : $@convention(thin) () -> @owned String // users: %26, %24
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %21 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %22
+  %22 = apply %21() : $@convention(thin) () -> @owned String // users: %25, %24
+  // function_ref print(_:separator:terminator:)
+  %23 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %24
+  %24 = apply %23(%6, %20, %22) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %22 : $String                     // id: %25
+  release_value %20 : $String                     // id: %26
+  release_value %6 : $Array<Any>                  // id: %27
+  br bb4                                          // id: %28
+
+bb2:                                              // Preds: bb0
+  %29 = integer_literal $Builtin.Word, 1          // user: %31
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %30 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %31
+  %31 = apply %30(%29) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %34, %32, %35
+  %32 = tuple_extract %31 : $(Array<Any>, Builtin.RawPointer), 0 // users: %53, %50, %33
+  retain_value %32 : $Array<Any>                  // id: %33
+  %34 = tuple_extract %31 : $(Array<Any>, Builtin.RawPointer), 1 // user: %36
+  release_value %31 : $(Array<Any>, Builtin.RawPointer) // id: %35
+  %36 = pointer_to_address %34 : $Builtin.RawPointer to [strict] $*Any // user: %37
+  %37 = init_existential_addr %36 : $*Any, $String // user: %44
+  %38 = string_literal utf8 "b"                   // user: %43
+  %39 = integer_literal $Builtin.Word, 1          // user: %43
+  %40 = integer_literal $Builtin.Int1, -1         // user: %43
+  %41 = metatype $@thin String.Type               // user: %43
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %42 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %43
+  %43 = apply %42(%38, %39, %40, %41) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %44
+  store %43 to %37 : $*String                     // id: %44
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %45 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %46
+  %46 = apply %45() : $@convention(thin) () -> @owned String // users: %52, %50
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %47 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %48
+  %48 = apply %47() : $@convention(thin) () -> @owned String // users: %51, %50
+  // function_ref print(_:separator:terminator:)
+  %49 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %50
+  %50 = apply %49(%32, %46, %48) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %48 : $String                     // id: %51
+  release_value %46 : $String                     // id: %52
+  release_value %32 : $Array<Any>                 // id: %53
+  br bb4                                          // id: %54
+
+bb3:                                              // Preds: bb0
+  %55 = integer_literal $Builtin.Word, 1          // user: %57
+  // function_ref specialized _allocateUninitializedArray<A>(_:)
+  %56 = function_ref @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // user: %57
+  %57 = apply %56(%55) : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer) // users: %60, %58, %61
+  %58 = tuple_extract %57 : $(Array<Any>, Builtin.RawPointer), 0 // users: %79, %76, %59
+  retain_value %58 : $Array<Any>                  // id: %59
+  %60 = tuple_extract %57 : $(Array<Any>, Builtin.RawPointer), 1 // user: %62
+  release_value %57 : $(Array<Any>, Builtin.RawPointer) // id: %61
+  %62 = pointer_to_address %60 : $Builtin.RawPointer to [strict] $*Any // user: %63
+  %63 = init_existential_addr %62 : $*Any, $String // user: %70
+  %64 = string_literal utf8 "c"                   // user: %69
+  %65 = integer_literal $Builtin.Word, 1          // user: %69
+  %66 = integer_literal $Builtin.Int1, -1         // user: %69
+  %67 = metatype $@thin String.Type               // user: %69
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %68 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %69
+  %69 = apply %68(%64, %65, %66, %67) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %70
+  store %69 to %63 : $*String                     // id: %70
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %71 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %72
+  %72 = apply %71() : $@convention(thin) () -> @owned String // users: %78, %76
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %73 = function_ref @$Ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %74
+  %74 = apply %73() : $@convention(thin) () -> @owned String // users: %77, %76
+  // function_ref print(_:separator:terminator:)
+  %75 = function_ref @$Ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %76
+  %76 = apply %75(%58, %72, %74) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %74 : $String                     // id: %77
+  release_value %72 : $String                     // id: %78
+  release_value %58 : $Array<Any>                 // id: %79
+  br bb4                                          // id: %80
+
+bb4:                                              // Preds: bb3 bb2 bb1
+  %81 = tuple ()                                  // user: %82
+  return %81 : $()                                // id: %82
+} // end sil function '$S4main10EnumLayoutO7whatAmIyyF'
+
+// static EnumLayout.__derived_enum_equals(_:_:)
+sil hidden @$S4main10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ : $@convention(method) (EnumLayout, EnumLayout, @thin EnumLayout.Type) -> Bool {
+// %0                                             // users: %7, %3
+// %1                                             // users: %27, %4
+// %2                                             // user: %5
+bb0(%0 : $EnumLayout, %1 : $EnumLayout, %2 : $@thin EnumLayout.Type):
+  debug_value %0 : $EnumLayout, let, name "a", argno 1 // id: %3
+  debug_value %1 : $EnumLayout, let, name "b", argno 2 // id: %4
+  debug_value %2 : $@thin EnumLayout.Type, let, name "self", argno 3 // id: %5
+  %6 = alloc_stack $Int, var, name "index_a"      // users: %46, %22, %16, %10, %57
+  switch_enum %0 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %7
+
+bb1:                                              // Preds: bb0
+  %8 = integer_literal $Builtin.Int64, 0          // user: %9
+  %9 = struct $Int (%8 : $Builtin.Int64)          // user: %11
+  %10 = begin_access [modify] [static] %6 : $*Int // users: %11, %12
+  store %9 to %10 : $*Int                         // id: %11
+  end_access %10 : $*Int                          // id: %12
+  br bb4                                          // id: %13
+
+bb2:                                              // Preds: bb0
+  %14 = integer_literal $Builtin.Int64, 1         // user: %15
+  %15 = struct $Int (%14 : $Builtin.Int64)        // user: %17
+  %16 = begin_access [modify] [static] %6 : $*Int // users: %17, %18
+  store %15 to %16 : $*Int                        // id: %17
+  end_access %16 : $*Int                          // id: %18
+  br bb4                                          // id: %19
+
+bb3:                                              // Preds: bb0
+  %20 = integer_literal $Builtin.Int64, 2         // user: %21
+  %21 = struct $Int (%20 : $Builtin.Int64)        // user: %23
+  %22 = begin_access [modify] [static] %6 : $*Int // users: %23, %24
+  store %21 to %22 : $*Int                        // id: %23
+  end_access %22 : $*Int                          // id: %24
+  br bb4                                          // id: %25
+
+bb4:                                              // Preds: bb3 bb2 bb1
+  %26 = alloc_stack $Int, var, name "index_b"     // users: %49, %42, %36, %30, %56
+  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb5, case #EnumLayout.b!enumelt: bb6, case #EnumLayout.c!enumelt: bb7 // id: %27
+
+bb5:                                              // Preds: bb4
+  %28 = integer_literal $Builtin.Int64, 0         // user: %29
+  %29 = struct $Int (%28 : $Builtin.Int64)        // user: %31
+  %30 = begin_access [modify] [static] %26 : $*Int // users: %31, %32
+  store %29 to %30 : $*Int                        // id: %31
+  end_access %30 : $*Int                          // id: %32
+  br bb8                                          // id: %33
+
+bb6:                                              // Preds: bb4
+  %34 = integer_literal $Builtin.Int64, 1         // user: %35
+  %35 = struct $Int (%34 : $Builtin.Int64)        // user: %37
+  %36 = begin_access [modify] [static] %26 : $*Int // users: %37, %38
+  store %35 to %36 : $*Int                        // id: %37
+  end_access %36 : $*Int                          // id: %38
+  br bb8                                          // id: %39
+
+bb7:                                              // Preds: bb4
+  %40 = integer_literal $Builtin.Int64, 2         // user: %41
+  %41 = struct $Int (%40 : $Builtin.Int64)        // user: %43
+  %42 = begin_access [modify] [static] %26 : $*Int // users: %43, %44
+  store %41 to %42 : $*Int                        // id: %43
+  end_access %42 : $*Int                          // id: %44
+  br bb8                                          // id: %45
+
+bb8:                                              // Preds: bb7 bb6 bb5
+  %46 = begin_access [read] [static] %6 : $*Int   // users: %47, %48
+  %47 = load %46 : $*Int                          // user: %52
+  end_access %46 : $*Int                          // id: %48
+  %49 = begin_access [read] [static] %26 : $*Int  // users: %50, %51
+  %50 = load %49 : $*Int                          // user: %53
+  end_access %49 : $*Int                          // id: %51
+  %52 = struct_extract %47 : $Int, #Int._value    // user: %54
+  %53 = struct_extract %50 : $Int, #Int._value    // user: %54
+  %54 = builtin "cmp_eq_Int64"(%52 : $Builtin.Int64, %53 : $Builtin.Int64) : $Builtin.Int1 // user: %55
+  %55 = struct $Bool (%54 : $Builtin.Int1)        // user: %58
+  dealloc_stack %26 : $*Int                       // id: %56
+  dealloc_stack %6 : $*Int                        // id: %57
+  return %55 : $Bool                              // id: %58
+} // end sil function '$S4main10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ'
+
+// static Int.== infix(_:_:)
+sil public_external [transparent] [serialized] @$SSi2eeoiySbSi_SitFZ : $@convention(method) (Int, Int, @thin Int.Type) -> Bool {
+// %0                                             // user: %3
+// %1                                             // user: %4
+bb0(%0 : $Int, %1 : $Int, %2 : $@thin Int.Type):
+  %3 = struct_extract %0 : $Int, #Int._value      // user: %5
+  %4 = struct_extract %1 : $Int, #Int._value      // user: %5
+  %5 = builtin "cmp_eq_Int64"(%3 : $Builtin.Int64, %4 : $Builtin.Int64) : $Builtin.Int1 // user: %6
+  %6 = struct $Bool (%5 : $Builtin.Int1)          // user: %7
+  return %6 : $Bool                               // id: %7
+} // end sil function '$SSi2eeoiySbSi_SitFZ'
+
+// EnumLayout.hashValue.getter
+sil hidden @$S4main10EnumLayoutO9hashValueSivg : $@convention(method) (EnumLayout) -> Int {
+// %0                                             // users: %3, %1
+bb0(%0 : $EnumLayout):
+  debug_value %0 : $EnumLayout, let, name "self", argno 1 // id: %1
+  %2 = alloc_stack $EnumLayout                    // users: %3, %6, %5
+  store %0 to %2 : $*EnumLayout                   // id: %3
+  // function_ref _hashValue<A>(for:)
+  %4 = function_ref @$Ss10_hashValue3forSix_tSHRzlF : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %5
+  %5 = apply %4<EnumLayout>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0) -> Int // user: %7
+  dealloc_stack %2 : $*EnumLayout                 // id: %6
+  return %5 : $Int                                // id: %7
+} // end sil function '$S4main10EnumLayoutO9hashValueSivg'
+
+// EnumLayout.hash(into:)
+sil hidden @$S4main10EnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, EnumLayout) -> () {
+// %0                                             // users: %29, %2
+// %1                                             // users: %5, %3
+bb0(%0 : $*Hasher, %1 : $EnumLayout):
+  debug_value_addr %0 : $*Hasher, var, name "hasher", argno 1 // id: %2
+  debug_value %1 : $EnumLayout, let, name "self", argno 2 // id: %3
+  %4 = alloc_stack $Int, var, name "discriminator" // users: %24, %20, %14, %8, %34
+  switch_enum %1 : $EnumLayout, case #EnumLayout.a!enumelt: bb1, case #EnumLayout.b!enumelt: bb2, case #EnumLayout.c!enumelt: bb3 // id: %5
+
+bb1:                                              // Preds: bb0
+  %6 = integer_literal $Builtin.Int64, 0          // user: %7
+  %7 = struct $Int (%6 : $Builtin.Int64)          // user: %9
+  %8 = begin_access [modify] [static] %4 : $*Int  // users: %9, %10
+  store %7 to %8 : $*Int                          // id: %9
+  end_access %8 : $*Int                           // id: %10
+  br bb4                                          // id: %11
+
+bb2:                                              // Preds: bb0
+  %12 = integer_literal $Builtin.Int64, 1         // user: %13
+  %13 = struct $Int (%12 : $Builtin.Int64)        // user: %15
+  %14 = begin_access [modify] [static] %4 : $*Int // users: %15, %16
+  store %13 to %14 : $*Int                        // id: %15
+  end_access %14 : $*Int                          // id: %16
+  br bb4                                          // id: %17
+
+bb3:                                              // Preds: bb0
+  %18 = integer_literal $Builtin.Int64, 2         // user: %19
+  %19 = struct $Int (%18 : $Builtin.Int64)        // user: %21
+  %20 = begin_access [modify] [static] %4 : $*Int // users: %21, %22
+  store %19 to %20 : $*Int                        // id: %21
+  end_access %20 : $*Int                          // id: %22
+  br bb4                                          // id: %23
+
+bb4:                                              // Preds: bb3 bb2 bb1
+  %24 = begin_access [read] [static] %4 : $*Int   // users: %25, %26
+  %25 = load %24 : $*Int                          // user: %28
+  end_access %24 : $*Int                          // id: %26
+  %27 = alloc_stack $Int                          // users: %28, %33, %31
+  store %25 to %27 : $*Int                        // id: %28
+  %29 = begin_access [modify] [static] %0 : $*Hasher // users: %32, %31
+  // function_ref Hasher.combine<A>(_:)
+  %30 = function_ref @$Ss6HasherV7combineyyxSHRzlF : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> () // user: %31
+  %31 = apply %30<Int>(%27, %29) : $@convention(method) <τ_0_0 where τ_0_0 : Hashable> (@in_guaranteed τ_0_0, @inout Hasher) -> ()
+  end_access %29 : $*Hasher                       // id: %32
+  dealloc_stack %27 : $*Int                       // id: %33
+  dealloc_stack %4 : $*Int                        // id: %34
+  %35 = tuple ()                                  // user: %36
+  return %35 : $()                                // id: %36
+} // end sil function '$S4main10EnumLayoutO4hash4intoys6HasherVz_tF'
+
+// protocol witness for static Equatable.== infix(_:_:) in conformance EnumLayout
+sil private [transparent] [thunk] @$S4main10EnumLayoutOSQAASQ2eeoiySbx_xtFZTW : $@convention(witness_method: Equatable) (@in_guaranteed EnumLayout, @in_guaranteed EnumLayout, @thick EnumLayout.Type) -> Bool {
+// %0                                             // user: %3
+// %1                                             // user: %4
+bb0(%0 : $*EnumLayout, %1 : $*EnumLayout, %2 : $@thick EnumLayout.Type):
+  %3 = load %0 : $*EnumLayout                     // user: %7
+  %4 = load %1 : $*EnumLayout                     // user: %7
+  %5 = metatype $@thin EnumLayout.Type            // user: %7
+  // function_ref static EnumLayout.__derived_enum_equals(_:_:)
+  %6 = function_ref @$S4main10EnumLayoutO21__derived_enum_equalsySbAC_ACtFZ : $@convention(method) (EnumLayout, EnumLayout, @thin EnumLayout.Type) -> Bool // user: %7
+  %7 = apply %6(%3, %4, %5) : $@convention(method) (EnumLayout, EnumLayout, @thin EnumLayout.Type) -> Bool // user: %8
+  return %7 : $Bool                               // id: %8
+} // end sil function '$S4main10EnumLayoutOSQAASQ2eeoiySbx_xtFZTW'
+
+// protocol witness for Hashable.hashValue.getter in conformance EnumLayout
+sil private [transparent] [thunk] @$S4main10EnumLayoutOSHAASH9hashValueSivgTW : $@convention(witness_method: Hashable) (@in_guaranteed EnumLayout) -> Int {
+// %0                                             // user: %1
+bb0(%0 : $*EnumLayout):
+  %1 = load %0 : $*EnumLayout                     // user: %3
+  // function_ref EnumLayout.hashValue.getter
+  %2 = function_ref @$S4main10EnumLayoutO9hashValueSivg : $@convention(method) (EnumLayout) -> Int // user: %3
+  %3 = apply %2(%1) : $@convention(method) (EnumLayout) -> Int // user: %4
+  return %3 : $Int                                // id: %4
+} // end sil function '$S4main10EnumLayoutOSHAASH9hashValueSivgTW'
+
+// protocol witness for Hashable.hash(into:) in conformance EnumLayout
+sil private [transparent] [thunk] @$S4main10EnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW : $@convention(witness_method: Hashable) (@inout Hasher, @in_guaranteed EnumLayout) -> () {
+// %0                                             // user: %4
+// %1                                             // user: %2
+bb0(%0 : $*Hasher, %1 : $*EnumLayout):
+  %2 = load %1 : $*EnumLayout                     // user: %4
+  // function_ref EnumLayout.hash(into:)
+  %3 = function_ref @$S4main10EnumLayoutO4hash4intoys6HasherVz_tF : $@convention(method) (@inout Hasher, EnumLayout) -> () // user: %4
+  %4 = apply %3(%0, %2) : $@convention(method) (@inout Hasher, EnumLayout) -> ()
+  %5 = tuple ()                                   // user: %6
+  return %5 : $()                                 // id: %6
+} // end sil function '$S4main10EnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW'
+
+// Int64.init(_builtinIntegerLiteral:)
+sil public_external [transparent] [serialized] @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int64.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int64"(%0 : $Builtin.Int2048) : $(Builtin.Int64, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int64 (%3 : $Builtin.Int64)        // user: %5
+  return %4 : $Int64                              // id: %5
+} // end sil function '$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC'
+
+// Double.init(_builtinFloatLiteral:)
+sil public_external [transparent] [serialized] @$SSd20_builtinFloatLiteralSdBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Double.Type) -> Double {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.FPIEEE80, %1 : $@thin Double.Type):
+  %2 = builtin "fptrunc_FPIEEE80_FPIEEE64"(%0 : $Builtin.FPIEEE80) : $Builtin.FPIEEE64 // user: %3
+  %3 = struct $Double (%2 : $Builtin.FPIEEE64)    // user: %4
+  return %3 : $Double                             // id: %4
+} // end sil function '$SSd20_builtinFloatLiteralSdBf80__tcfC'
+
+// Int32.init(_builtinIntegerLiteral:)
+sil public_external [transparent] [serialized] @$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int32.Type) -> Int32 {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int32.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int32"(%0 : $Builtin.Int2048) : $(Builtin.Int32, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int32, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int32 (%3 : $Builtin.Int32)        // user: %5
+  return %4 : $Int32                              // id: %5
+} // end sil function '$Ss5Int32V22_builtinIntegerLiteralABBi2048__tcfC'
+
+// Bool.init(_builtinBooleanLiteral:)
+sil public_external [transparent] [serialized] @$SSb22_builtinBooleanLiteralSbBi1__tcfC : $@convention(method) (Builtin.Int1, @thin Bool.Type) -> Bool {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int1, %1 : $@thin Bool.Type):
+  %2 = struct $Bool (%0 : $Builtin.Int1)          // user: %3
+  return %2 : $Bool                               // id: %3
+} // end sil function '$SSb22_builtinBooleanLiteralSbBi1__tcfC'
+
+// Float.init(_builtinFloatLiteral:)
+sil public_external [transparent] [serialized] @$SSf20_builtinFloatLiteralSfBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.FPIEEE80, %1 : $@thin Float.Type):
+  %2 = builtin "fptrunc_FPIEEE80_FPIEEE32"(%0 : $Builtin.FPIEEE80) : $Builtin.FPIEEE32 // user: %3
+  %3 = struct $Float (%2 : $Builtin.FPIEEE32)     // user: %4
+  return %3 : $Float                              // id: %4
+} // end sil function '$SSf20_builtinFloatLiteralSfBf80__tcfC'
+
+// protocol witness for static Equatable.== infix(_:_:) in conformance Int
+sil shared_external [transparent] [serialized] [thunk] @$SSiSQsSQ2eeoiySbx_xtFZTW : $@convention(witness_method: Equatable) (@in_guaranteed Int, @in_guaranteed Int, @thick Int.Type) -> Bool {
+// %0                                             // user: %3
+// %1                                             // user: %5
+bb0(%0 : $*Int, %1 : $*Int, %2 : $@thick Int.Type):
+  %3 = struct_element_addr %0 : $*Int, #Int._value // user: %4
+  %4 = load %3 : $*Builtin.Int64                  // user: %7
+  %5 = struct_element_addr %1 : $*Int, #Int._value // user: %6
+  %6 = load %5 : $*Builtin.Int64                  // user: %7
+  %7 = builtin "cmp_eq_Int64"(%4 : $Builtin.Int64, %6 : $Builtin.Int64) : $Builtin.Int1 // user: %8
+  %8 = struct $Bool (%7 : $Builtin.Int1)          // user: %9
+  return %8 : $Bool                               // id: %9
+} // end sil function '$SSiSQsSQ2eeoiySbx_xtFZTW'
+
+// specialized _allocateUninitializedArray<A>(_:)
+sil [always_inline] @$Ss27_allocateUninitializedArrayySayxG_BptBwlFyp_Tg5 : $@convention(thin) (Builtin.Word) -> (@owned Array<Any>, Builtin.RawPointer)
+
+sil_witness_table hidden RawEnumLayout: Equatable module main {
+  method #Equatable."=="!1: <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : @$S4main13RawEnumLayoutOSQAASQ2eeoiySbx_xtFZTW	// protocol witness for static Equatable.== infix(_:_:) in conformance RawEnumLayout
+}
+
+sil_witness_table hidden RawEnumLayout: Hashable module main {
+  base_protocol Equatable: RawEnumLayout: Equatable module main
+  method #Hashable.hashValue!getter.1: <Self where Self : Hashable> (Self) -> () -> Int : @$S4main13RawEnumLayoutOSHAASH9hashValueSivgTW	// protocol witness for Hashable.hashValue.getter in conformance RawEnumLayout
+  method #Hashable.hash!1: <Self where Self : Hashable> (Self) -> (inout Hasher) -> () : @$S4main13RawEnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW	// protocol witness for Hashable.hash(into:) in conformance RawEnumLayout
+}
+
+sil_witness_table hidden RawEnumLayout: RawRepresentable module main {
+  associated_type RawValue: Int
+  method #RawRepresentable.init!allocator.1: <Self where Self : RawRepresentable> (Self.Type) -> (Self.RawValue) -> Self? : @$S4main13RawEnumLayoutOSYAASY8rawValuexSg0bF0Qz_tcfCTW	// protocol witness for RawRepresentable.init(rawValue:) in conformance RawEnumLayout
+  method #RawRepresentable.rawValue!getter.1: <Self where Self : RawRepresentable> (Self) -> () -> Self.RawValue : @$S4main13RawEnumLayoutOSYAASY8rawValue0bF0QzvgTW	// protocol witness for RawRepresentable.rawValue.getter in conformance RawEnumLayout
+}
+
+sil_witness_table hidden EnumLayout: Equatable module main {
+  method #Equatable."=="!1: <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : @$S4main10EnumLayoutOSQAASQ2eeoiySbx_xtFZTW	// protocol witness for static Equatable.== infix(_:_:) in conformance EnumLayout
+}
+
+sil_witness_table hidden EnumLayout: Hashable module main {
+  base_protocol Equatable: EnumLayout: Equatable module main
+  method #Hashable.hashValue!getter.1: <Self where Self : Hashable> (Self) -> () -> Int : @$S4main10EnumLayoutOSHAASH9hashValueSivgTW	// protocol witness for Hashable.hashValue.getter in conformance EnumLayout
+  method #Hashable.hash!1: <Self where Self : Hashable> (Self) -> (inout Hasher) -> () : @$S4main10EnumLayoutOSHAASH4hash4intoys6HasherVz_tFTW	// protocol witness for Hashable.hash(into:) in conformance EnumLayout
+}
+
+sil_witness_table public_external [serialized] Int: Equatable module Swift {
+  method #Equatable."=="!1: <Self where Self : Equatable> (Self.Type) -> (Self, Self) -> Bool : @$SSiSQsSQ2eeoiySbx_xtFZTW	// protocol witness for static Equatable.== infix(_:_:) in conformance Int
+}
+
+
+

@@ -1,0 +1,206 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+func f1(_ a: Int64, b: Float) -> Float
+
+class CallTest {
+  static func f2() -> String
+  func f3() -> String
+  func f4() -> CallTest
+  init()
+  deinit
+}
+
+let test: CallTest
+
+// test
+sil_global hidden [let] @$S4func4testAA8CallTestCvp : $CallTest
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int64, 1          // user: %3
+  %3 = struct $Int64 (%2 : $Builtin.Int64)        // user: %7
+  %4 = float_literal $Builtin.FPIEEE32, 0x40000000 // 2 // user: %5
+  %5 = struct $Float (%4 : $Builtin.FPIEEE32)     // user: %7
+  // function_ref f1(_:b:)
+  %6 = function_ref @$S4func2f1_1bSfs5Int64V_SftF : $@convention(thin) (Int64, Float) -> Float // user: %7
+  %7 = apply %6(%3, %5) : $@convention(thin) (Int64, Float) -> Float
+  %8 = metatype $@thick CallTest.Type             // user: %10
+  // function_ref static CallTest.f2()
+  %9 = function_ref @$S4func8CallTestC2f2SSyFZ : $@convention(method) (@thick CallTest.Type) -> @owned String // user: %10
+  %10 = apply %9(%8) : $@convention(method) (@thick CallTest.Type) -> @owned String // user: %11
+  release_value %10 : $String                     // id: %11
+  alloc_global @$S4func4testAA8CallTestCvp        // id: %12
+  %13 = global_addr @$S4func4testAA8CallTestCvp : $*CallTest // users: %22, %18, %17
+  %14 = metatype $@thick CallTest.Type            // user: %16
+  // function_ref CallTest.__allocating_init()
+  %15 = function_ref @$S4func8CallTestCACycfC : $@convention(method) (@thick CallTest.Type) -> @owned CallTest // user: %16
+  %16 = apply %15(%14) : $@convention(method) (@thick CallTest.Type) -> @owned CallTest // user: %17
+  store %16 to %13 : $*CallTest                   // id: %17
+  %18 = load %13 : $*CallTest                     // users: %19, %20
+  %19 = class_method %18 : $CallTest, #CallTest.f3!1 : (CallTest) -> () -> String, $@convention(method) (@guaranteed CallTest) -> @owned String // user: %20
+  %20 = apply %19(%18) : $@convention(method) (@guaranteed CallTest) -> @owned String // user: %21
+  release_value %20 : $String                     // id: %21
+  %22 = load %13 : $*CallTest                     // users: %23, %24
+  %23 = class_method %22 : $CallTest, #CallTest.f4!1 : (CallTest) -> () -> CallTest, $@convention(method) (@guaranteed CallTest) -> @owned CallTest // user: %24
+  %24 = apply %23(%22) : $@convention(method) (@guaranteed CallTest) -> @owned CallTest // user: %25
+  strong_release %24 : $CallTest                  // id: %25
+  %26 = integer_literal $Builtin.Int32, 0         // user: %27
+  %27 = struct $Int32 (%26 : $Builtin.Int32)      // user: %28
+  return %27 : $Int32                             // id: %28
+} // end sil function 'main'
+
+// f1(_:b:)
+sil hidden @$S4func2f1_1bSfs5Int64V_SftF : $@convention(thin) (Int64, Float) -> Float {
+// %0                                             // users: %4, %2
+// %1                                             // users: %8, %3
+bb0(%0 : $Int64, %1 : $Float):
+  debug_value %0 : $Int64, let, name "a", argno 1 // id: %2
+  debug_value %1 : $Float, let, name "b", argno 2 // id: %3
+  %4 = struct_extract %0 : $Int64, #Int64._value  // user: %5
+  %5 = builtin "sitofp_Int64_FPIEEE32"(%4 : $Builtin.Int64) : $Builtin.FPIEEE32 // user: %6
+  %6 = struct $Float (%5 : $Builtin.FPIEEE32)     // user: %7
+  %7 = struct_extract %6 : $Float, #Float._value  // user: %9
+  %8 = struct_extract %1 : $Float, #Float._value  // user: %9
+  %9 = builtin "fmul_FPIEEE32"(%7 : $Builtin.FPIEEE32, %8 : $Builtin.FPIEEE32) : $Builtin.FPIEEE32 // user: %10
+  %10 = struct $Float (%9 : $Builtin.FPIEEE32)    // user: %11
+  return %10 : $Float                             // id: %11
+} // end sil function '$S4func2f1_1bSfs5Int64V_SftF'
+
+// Float.init(_:)
+sil public_external [transparent] [serialized] @$SSfySfs5Int64VcfC : $@convention(method) (Int64, @thin Float.Type) -> Float {
+// %0                                             // user: %2
+bb0(%0 : $Int64, %1 : $@thin Float.Type):
+  %2 = struct_extract %0 : $Int64, #Int64._value  // user: %3
+  %3 = builtin "sitofp_Int64_FPIEEE32"(%2 : $Builtin.Int64) : $Builtin.FPIEEE32 // user: %4
+  %4 = struct $Float (%3 : $Builtin.FPIEEE32)     // user: %5
+  return %4 : $Float                              // id: %5
+} // end sil function '$SSfySfs5Int64VcfC'
+
+// static Float.* infix(_:_:)
+sil public_external [transparent] [serialized] @$SSf1moiyS2f_SftFZ : $@convention(method) (Float, Float, @thin Float.Type) -> Float {
+// %0                                             // user: %3
+// %1                                             // user: %4
+bb0(%0 : $Float, %1 : $Float, %2 : $@thin Float.Type):
+  %3 = struct_extract %0 : $Float, #Float._value  // user: %5
+  %4 = struct_extract %1 : $Float, #Float._value  // user: %5
+  %5 = builtin "fmul_FPIEEE32"(%3 : $Builtin.FPIEEE32, %4 : $Builtin.FPIEEE32) : $Builtin.FPIEEE32 // user: %6
+  %6 = struct $Float (%5 : $Builtin.FPIEEE32)     // user: %7
+  return %6 : $Float                              // id: %7
+} // end sil function '$SSf1moiyS2f_SftFZ'
+
+// static CallTest.f2()
+sil hidden @$S4func8CallTestC2f2SSyFZ : $@convention(method) (@thick CallTest.Type) -> @owned String {
+// %0                                             // user: %1
+bb0(%0 : $@thick CallTest.Type):
+  debug_value %0 : $@thick CallTest.Type, let, name "self", argno 1 // id: %1
+  %2 = string_literal utf8 "hi"                   // user: %7
+  %3 = integer_literal $Builtin.Word, 2           // user: %7
+  %4 = integer_literal $Builtin.Int1, -1          // user: %7
+  %5 = metatype $@thin String.Type                // user: %7
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %6 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %7
+  %7 = apply %6(%2, %3, %4, %5) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %8
+  return %7 : $String                             // id: %8
+} // end sil function '$S4func8CallTestC2f2SSyFZ'
+
+// String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+sil [serialized] [always_inline] [readonly] [_semantics "string.makeUTF8"] @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
+
+// CallTest.f3()
+sil hidden @$S4func8CallTestC2f3SSyF : $@convention(method) (@guaranteed CallTest) -> @owned String {
+// %0                                             // user: %1
+bb0(%0 : $CallTest):
+  debug_value %0 : $CallTest, let, name "self", argno 1 // id: %1
+  %2 = string_literal utf8 "yo"                   // user: %7
+  %3 = integer_literal $Builtin.Word, 2           // user: %7
+  %4 = integer_literal $Builtin.Int1, -1          // user: %7
+  %5 = metatype $@thin String.Type                // user: %7
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %6 = function_ref @$SSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %7
+  %7 = apply %6(%2, %3, %4, %5) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %8
+  return %7 : $String                             // id: %8
+} // end sil function '$S4func8CallTestC2f3SSyF'
+
+// CallTest.f4()
+sil hidden @$S4func8CallTestC2f4ACyF : $@convention(method) (@guaranteed CallTest) -> @owned CallTest {
+// %0                                             // users: %3, %2, %1
+bb0(%0 : $CallTest):
+  debug_value %0 : $CallTest, let, name "self", argno 1 // id: %1
+  strong_retain %0 : $CallTest                    // id: %2
+  return %0 : $CallTest                           // id: %3
+} // end sil function '$S4func8CallTestC2f4ACyF'
+
+// CallTest.__allocating_init()
+sil hidden @$S4func8CallTestCACycfC : $@convention(method) (@thick CallTest.Type) -> @owned CallTest {
+bb0(%0 : $@thick CallTest.Type):
+  %1 = alloc_ref $CallTest                        // user: %3
+  // function_ref CallTest.init()
+  %2 = function_ref @$S4func8CallTestCACycfc : $@convention(method) (@owned CallTest) -> @owned CallTest // user: %3
+  %3 = apply %2(%1) : $@convention(method) (@owned CallTest) -> @owned CallTest // user: %4
+  return %3 : $CallTest                           // id: %4
+} // end sil function '$S4func8CallTestCACycfC'
+
+// CallTest.init()
+sil hidden @$S4func8CallTestCACycfc : $@convention(method) (@owned CallTest) -> @owned CallTest {
+// %0                                             // users: %2, %1
+bb0(%0 : $CallTest):
+  debug_value %0 : $CallTest, let, name "self", argno 1 // id: %1
+  return %0 : $CallTest                           // id: %2
+} // end sil function '$S4func8CallTestCACycfc'
+
+// CallTest.deinit
+sil hidden @$S4func8CallTestCfd : $@convention(method) (@guaranteed CallTest) -> @owned Builtin.NativeObject {
+// %0                                             // users: %2, %1
+bb0(%0 : $CallTest):
+  debug_value %0 : $CallTest, let, name "self", argno 1 // id: %1
+  %2 = unchecked_ref_cast %0 : $CallTest to $Builtin.NativeObject // user: %3
+  return %2 : $Builtin.NativeObject               // id: %3
+} // end sil function '$S4func8CallTestCfd'
+
+// CallTest.__deallocating_deinit
+sil hidden @$S4func8CallTestCfD : $@convention(method) (@owned CallTest) -> () {
+// %0                                             // users: %3, %1
+bb0(%0 : $CallTest):
+  debug_value %0 : $CallTest, let, name "self", argno 1 // id: %1
+  // function_ref CallTest.deinit
+  %2 = function_ref @$S4func8CallTestCfd : $@convention(method) (@guaranteed CallTest) -> @owned Builtin.NativeObject // user: %3
+  %3 = apply %2(%0) : $@convention(method) (@guaranteed CallTest) -> @owned Builtin.NativeObject // user: %4
+  %4 = unchecked_ref_cast %3 : $Builtin.NativeObject to $CallTest // user: %5
+  dealloc_ref %4 : $CallTest                      // id: %5
+  %6 = tuple ()                                   // user: %7
+  return %6 : $()                                 // id: %7
+} // end sil function '$S4func8CallTestCfD'
+
+// Int64.init(_builtinIntegerLiteral:)
+sil public_external [transparent] [serialized] @$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC : $@convention(method) (Builtin.Int2048, @thin Int64.Type) -> Int64 {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.Int2048, %1 : $@thin Int64.Type):
+  %2 = builtin "s_to_s_checked_trunc_Int2048_Int64"(%0 : $Builtin.Int2048) : $(Builtin.Int64, Builtin.Int1) // user: %3
+  %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
+  %4 = struct $Int64 (%3 : $Builtin.Int64)        // user: %5
+  return %4 : $Int64                              // id: %5
+} // end sil function '$Ss5Int64V22_builtinIntegerLiteralABBi2048__tcfC'
+
+// Float.init(_builtinFloatLiteral:)
+sil public_external [transparent] [serialized] @$SSf20_builtinFloatLiteralSfBf80__tcfC : $@convention(method) (Builtin.FPIEEE80, @thin Float.Type) -> Float {
+// %0                                             // user: %2
+bb0(%0 : $Builtin.FPIEEE80, %1 : $@thin Float.Type):
+  %2 = builtin "fptrunc_FPIEEE80_FPIEEE32"(%0 : $Builtin.FPIEEE80) : $Builtin.FPIEEE32 // user: %3
+  %3 = struct $Float (%2 : $Builtin.FPIEEE32)     // user: %4
+  return %3 : $Float                              // id: %4
+} // end sil function '$SSf20_builtinFloatLiteralSfBf80__tcfC'
+
+sil_vtable CallTest {
+  #CallTest.f3!1: (CallTest) -> () -> String : @$S4func8CallTestC2f3SSyF	// CallTest.f3()
+  #CallTest.f4!1: (CallTest) -> () -> CallTest : @$S4func8CallTestC2f4ACyF	// CallTest.f4()
+  #CallTest.init!initializer.1: (CallTest.Type) -> () -> CallTest : @$S4func8CallTestCACycfc	// CallTest.init()
+  #CallTest.deinit!deallocator: @$S4func8CallTestCfD	// CallTest.__deallocating_deinit
+}
+
+
+
